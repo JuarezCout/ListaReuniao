@@ -1,5 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import './index.css'
+import App from './main/App'
+import registerServiceWorker from './registerServiceWorker'
 
+console.log('App', App)
 
-ReactDOM.render(<h1>Titulo</h1>, document.getElementById('root'))
+ReactDOM.render(<App    />, document.getElementById('root'))

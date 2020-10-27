@@ -1,0 +1,24 @@
+{
+  "name": "projetos",
+  "version": "1.0.0",
+  "description": "Criacao de listas para Reunioes CCB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --watch db.json --port 3001"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuarezCout/ListaReuniao.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuarezCout/ListaReuniao/issues"
+  },
+  "homepage": "https://github.com/JuarezCout/ListaReuniao#readme",
+  "dependencies": {
+    "create-react-app": "^4.0.0",
+    "json-server": "0.13.0"
+  }
+}

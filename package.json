@@ -19,6 +19,8 @@
   "homepage": "https://github.com/JuarezCout/ListaReuniao#readme",
   "dependencies": {
     "create-react-app": "^4.0.0",
-    "json-server": "0.13.0"
+    "font-awesome": "^4.7.0",
+    "json-server": "^0.16.2",
+    "reactstrap": "^8.7.0"
   }
 }

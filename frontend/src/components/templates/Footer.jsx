@@ -2,6 +2,8 @@ import './Footer.css'
 import React from 'react'
 
 export default props =>
-    <aside className="footer">
-        Footer
-    </aside>
+    <footer className="footer">
+        <span>
+            Desenvolvido para Congregação Cristã no Brasil.   
+        </span>
+    </footer>

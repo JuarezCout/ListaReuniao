@@ -1,24 +1,8 @@
 {
   "listas": [
     {
-      "servico": "Batismo",
-      "data": "2020-10-31",
+      "{\"id\":1,\"data\":\"6/12/2020\",\"localidades\":[{\"nome\":\"Fortaleza\",\"servicos\":[{\"nome\":\"Batismo\",\"reunioes\":[{\"data\":\"AAA\",\"dia\":\"AAA\",\"hora\":\"AAA\",\"local\":\"AA\",\"anciao\":\"AAA\"}]}],\"diversos\":[{\"servicos_extras\":[{\"nome\":\"AGO\",\"reunioes_extras\":[{\"data\":\"111\",\"dia\":\"111\",\"hora\":\"111\",\"local\":\"11\"}]}],\"obs\":[{\"text_obs\":\"aaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanat\"},{\"text_obs\":\"aaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanat\"}]}]}]}": "",
       "id": 1
-    },
-    {
-      "servico": "Santa Ceia",
-      "data": "2020-11-17",
-      "id": 2
-    },
-    {
-      "servico": "Santa Ceia",
-      "data": "2020-11-24",
-      "id": 3
-    },
-    {
-      "servico": "Santa Ceia",
-      "data": "2020-10-07",
-      "id": 4
     }
   ]
 }

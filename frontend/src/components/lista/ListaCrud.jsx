@@ -2,7 +2,11 @@ import React, { Component, useState, useEffect } from 'react'
 import './ListaCrud.css'
 import axios from 'axios'
 import Main from '../templates/Main'
-import { Container, Row, Col } from 'reactstrap';
+import Localidade from '../localidade/Localidade'
+import Servicos from '../localidade/servico/Servico'
+import Reunioes from '../localidade/servico/reunioes/Reunioes'
+import { Container, Row, Col } from 'reactstrap'
+import { Link } from 'react-router-dom'
 
 const headerProps = {
     icon: 'listas',
@@ -10,7 +14,6 @@ const headerProps = {
     subtitle: 'Cadastro de Listas: Incluir, Listar, Alterar e Excluir!'
 }
 
-const baseUrl = 'http://localhost:3001/listas'
 
 
 export default ListaCrud;
@@ -19,15 +22,49 @@ function ListaCrud() {
 
     document.title = "Listas para Reuniões"
 
+    //Adicionar um get da base de listas e atribuir um id novo para a lista nova, corrigindo o useEffect para PUT ou POST
+
     const [inputListas, setInputLista] = useState(
-        [{ data: setDate(), localidades: [] }]
+        [{ id: 1, data: setDate(), localidades: [] }]
     );
+
+    const baseUrl = 'http://localhost:3001/listas'
+
+
+
 
     useEffect(() => {
 
+        let values = { ...inputListas };
+        console.log(values)
+        var obj = JSON.stringify(values[0])
+        console.log(obj)
+
+        /* fetch('http://localhost:3001/listas/1', {
+            method: 'post',
+            body: JSON.stringify(values)
+        })
+            .then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', JSON.stringify(response))) */
+
+        //const method = user.id ? 'put' : 'post'
+
+        const method = values[0].id ? 'put' : 'post'
+        const url = values[0].id ? `${baseUrl}/${values[0].id}` : baseUrl
+
+        axios[method](url, obj)
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response.data))
     });
 
     //Funções para uso de dados aleatorios
+    /* function previewImage() {
+        pdffile=document.getElementById("uploadPDF").files[0];
+        pdffile_url=URL.createObjectURL(pdffile);
+        $('#viewer').attr('src',pdffile_url);
+    } */
+
     function setDate() {
         var n = new Date();
         var y = n.getFullYear();
@@ -35,10 +72,12 @@ function ListaCrud() {
         var d = n.getDate();
         var data = d + "/" + m + "/" + y
 
-        /*        let values =  { ...inputListas };
-               values[0].data = data;
-               setInputLista(values) */
         return data
+    }
+
+
+    function indexaId(nomeId, id_l, id_s) {
+        return nomeId + id_l.toString() + id_s.toString();
     }
 
     //Funções para botões do campo Localidade
@@ -46,7 +85,7 @@ function ListaCrud() {
         let values = { ...inputListas };
         values[0].localidades.push({ nome: nome, servicos: [], diversos: [{ servicos_extras: [], obs: [] }] })
         setInputLista(values)
-        console.log(values)
+        document.getElementById("local").value = ''
     }
 
     function handleRemoveLocalidade(index_l) {
@@ -55,7 +94,7 @@ function ListaCrud() {
         setInputLista(values)
     }
 
-    function handleEditReuniao(index_l) {
+    function handleEditLocalidade(index_l) {
 
     }
 
@@ -81,18 +120,24 @@ function ListaCrud() {
         let values = { ...inputListas };
         values[0].localidades[index_l].diversos[0].obs.push({ text_obs: text_obs })
         setInputLista(values)
+        document.getElementById(indexaId("text_obs", index_l, 0)).value = ''
     }
 
     function handleAddServicoExtra(nome, index_l) {
         let values = { ...inputListas };
         values[0].localidades[index_l].diversos[0].servicos_extras.push({ nome: nome, reunioes_extras: [] })
         setInputLista(values)
+        document.getElementById("nome_reuniao").value = ''
     }
 
     function handleAddReuniaoExtra(data, dia, hora, local, index_l, index_se) {
         let values = { ...inputListas };
         values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras.push({ data: data, dia: dia, hora: hora, local: local })
         setInputLista(values)
+        document.getElementById(indexaId("data_reuniao_e", index_l, index_se)).value = ''
+        document.getElementById(indexaId("dia_reuniao_e", index_l, index_se)).value = ''
+        document.getElementById(indexaId("hora_reuniao_e", index_l, index_se)).value = ''
+        document.getElementById(indexaId("local_reuniao_e", index_l, index_se)).value = ''
     }
 
     function handleRemoveObservacao(index_l, index_o) {
@@ -130,6 +175,11 @@ function ListaCrud() {
             anciao: anciao
         })
         setInputLista(values)
+        document.getElementById(indexaId("data_reuniao", index_l, index_s)).value = ''
+        document.getElementById(indexaId("dia_reuniao", index_l, index_s)).value = ''
+        document.getElementById(indexaId("hora_reuniao", index_l, index_s)).value = ''
+        document.getElementById(indexaId("local_reuniao", index_l, index_s)).value = ''
+        document.getElementById(indexaId("anciao_reuniao", index_l, index_s)).value = ''
     }
 
     function handleRemoveReuniao(index_l, index_s, index_r) {
@@ -145,12 +195,13 @@ function ListaCrud() {
 
     //Função para renderização do conteudo
     function renderForm() {
-        var state_lista = { ...inputListas }
         var date = setDate()
 
 
         return (
             <Container className="form">
+
+
                 <Row>
                     <Col xs="6" className="form-group">
                         <h1>Reunião do dia: {date}</h1>
@@ -159,7 +210,7 @@ function ListaCrud() {
 
                 <Row>
                     <Col xs="8" className="form-group">
-                        <label>Localidade</label>
+                        <label htmlFor="local">Localidade</label>
                         <input type="text" className="form-control" id="local" />
                     </Col>
                     <Col xs="4" className="form-group">
@@ -171,7 +222,20 @@ function ListaCrud() {
                 </Row>
 
                 {inputListas[0].localidades && inputListas[0].localidades.map((inputLocalidade, index_l) => (
+
                     <div className="container">
+                        {/*     <Localidade data={[inputLocalidade, index_l] } setInputLista={setInputLista}>
+                        {inputLocalidade.servicos && inputLocalidade.servicos.map((inputServico, index_s) => (
+                            <Servicos data={[inputServico, index_l, index_s]} setInputLista={setInputLista}>
+                                {inputServico.reunioes && inputServico.reunioes.map((inputReuniao, index_r) => (
+                                    <Reunioes data= {[inputReuniao, index_l, index_s, index_r]} setInputLista={setInputLista}>
+                                    </Reunioes>
+                                ))}
+                            </Servicos>
+                        ))}
+                    </Localidade> */}
+
+
 
                         <hr />
 
@@ -209,9 +273,9 @@ function ListaCrud() {
 
                                 <hr />
 
-                                <div className="row">
+                                <div className="row" key={index_s}>
                                     <div className="col-4">
-                                        <div className="form-group" key={index_s}>
+                                        <div className="form-group">
                                             <h3>{inputServico.nome}</h3>
                                         </div>
                                     </div>
@@ -240,33 +304,33 @@ function ListaCrud() {
 
                                 <div className="row">
                                     <div className="col-1">
-                                        <input type="text" className="form-control" id="data_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("data_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-1">
-                                        <input type="text" className="form-control" id="dia_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("dia_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-2">
-                                        <input type="text" className="form-control" id="hora_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("hora_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-4">
-                                        <input type="text" className="form-control" id="local_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("local_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-3">
-                                        <input type="text" className="form-control" id="anciao_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("anciao_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-1">
-                                        <i className="fa fa-plus" onClick={() => handleAddReuniao(document.getElementById("data_reuniao").value,
-                                            document.getElementById("dia_reuniao").value,
-                                            document.getElementById("hora_reuniao").value,
-                                            document.getElementById("local_reuniao").value,
-                                            document.getElementById("anciao_reuniao").value,
+                                        <i className="fa fa-plus" onClick={() => handleAddReuniao(document.getElementById(indexaId("data_reuniao", index_l, index_s)).value,
+                                            document.getElementById(indexaId("dia_reuniao", index_l, index_s)).value,
+                                            document.getElementById(indexaId("hora_reuniao", index_l, index_s)).value,
+                                            document.getElementById(indexaId("local_reuniao", index_l, index_s)).value,
+                                            document.getElementById(indexaId("anciao_reuniao", index_l, index_s)).value,
                                             index_l, index_s)}></i>
                                     </div>
                                 </div>
 
                                 {inputServico.reunioes && inputServico.reunioes.map((inputReuniao, index_r) => (
                                     <div className="container">
-                                        <hr/>
+                                        <hr />
                                         <div className="row" key={index_r}>
                                             <div className="col-1">
                                                 <label>{inputReuniao.data}</label>
@@ -354,23 +418,23 @@ function ListaCrud() {
 
                                 <div className="row">
                                     <div className="col-1">
-                                        <input type="text" className="form-control" id="data_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("data_reuniao_e", index_l, index_se)} />
                                     </div>
                                     <div className="col-1">
-                                        <input type="text" className="form-control" id="dia_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("dia_reuniao_e", index_l, index_se)} />
                                     </div>
                                     <div className="col-2">
-                                        <input type="text" className="form-control" id="hora_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("hora_reuniao_e", index_l, index_se)} />
                                     </div>
                                     <div className="col-4">
-                                        <input type="text" className="form-control" id="local_reuniao" />
+                                        <input type="text" className="form-control" id={indexaId("local_reuniao_e", index_l, index_se)} />
                                     </div>
                                     <div className="col-1">
                                         <i className="fa fa-plus" onClick={() => handleAddReuniaoExtra(
-                                            document.getElementById("data_reuniao").value,
-                                            document.getElementById("dia_reuniao").value,
-                                            document.getElementById("hora_reuniao").value,
-                                            document.getElementById("local_reuniao").value,
+                                            document.getElementById(indexaId("data_reuniao_e", index_l, index_se)).value,
+                                            document.getElementById(indexaId("dia_reuniao_e", index_l, index_se)).value,
+                                            document.getElementById(indexaId("hora_reuniao_e", index_l, index_se)).value,
+                                            document.getElementById(indexaId("local_reuniao_e", index_l, index_se)).value,
                                             index_l, index_se)}></i>
                                     </div>
                                 </div>
@@ -415,10 +479,10 @@ function ListaCrud() {
 
                         <div className="row">
                             <div className="col-8">
-                                <input type="text" className="form-control" id="text_obs" />
+                                <input type="text" className="form-control" id={indexaId("text_obs", index_l, 0)} />
                             </div>
                             <div className="col-4">
-                                <i className="fa fa-plus" onClick={() => handleAddObservacao(document.getElementById("text_obs").value, index_l)}></i>
+                                <i className="fa fa-plus" onClick={() => handleAddObservacao(document.getElementById(indexaId("text_obs", index_l, 0)).value, index_l)}></i>
                             </div>
                         </div>
 
@@ -435,6 +499,27 @@ function ListaCrud() {
                         ))}
                     </div>
                 ))}
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+
+                <Row>
+                    <div className="col-md-4 text-center">
+                        <Link to="/listas/pdf">
+                            <a class="btn btn-danger">Gerar PDF</a>
+                        </Link>
+                    </div>
+                    <div className="col-md-4 text-center">
+                        <a href="/" class="btn btn-warning">Voltar</a>
+                    </div>
+                    <div className="col-md-4 text-center">
+                        <a href="/lista-pdf" class="btn btn-success">Salvar Lista</a>
+                    </div>
+                </Row>
+
             </Container >
         )
     }

@@ -1,0 +1,41 @@
+td, th {
+    text-align: left;
+    font-size: 11px;
+    word-wrap: break-word;
+    text-align: center;
+    padding: 0;
+  }
+
+#localidade {
+    font-size: 22px;
+    border: 2px solid black;
+}
+
+#servico {
+    font-size: 15px;
+    width: 375px;
+    border: 1px solid black;
+}
+
+#diversos {
+    font-size: 20px;
+    border: 1px solid black;
+}
+
+#reuniao {
+    border: 1px solid black;
+}
+
+  img {
+      width: 100%;
+  }
+
+#obs {
+    
+    font-size: 11px;
+}
+
+  table {
+    width: 375px;
+    border-collapse: collapse;
+  }

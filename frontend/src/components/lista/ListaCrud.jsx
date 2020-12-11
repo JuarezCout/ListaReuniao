@@ -25,7 +25,7 @@ function ListaCrud() {
     //Adicionar um get da base de listas e atribuir um id novo para a lista nova, corrigindo o useEffect para PUT ou POST
 
     const [inputListas, setInputLista] = useState(
-        [{ id: 1, data: setDate(), localidades: [] }]
+        [{data: setDate(), localidades: [] }]
     );
 
     const baseUrl = 'http://localhost:3001/listas'
@@ -37,8 +37,11 @@ function ListaCrud() {
 
         let values = { ...inputListas };
         console.log(values)
-        var obj = JSON.stringify(values[0])
-        console.log(obj)
+        console.log("Dados antes do Stringfy", values[0])
+        //console.log(values)
+        //var obj = JSON.stringify(values[0])
+        var obj =   values[0]
+        console.log("Dados apos stringfy", obj)
 
         /* fetch('http://localhost:3001/listas/1', {
             method: 'post',
@@ -254,11 +257,11 @@ function ListaCrud() {
                             <div className="col-8">
                                 <div className="form-group">
                                     <select className="form-select" name="servicos" id="servicos">
-                                        <option value="Batismo">Batismo</option>
-                                        <option value="Santa Ceia">Santa Ceia</option>
-                                        <option value="Reunião de Mocidade">Reunião de Mocidade</option>
-                                        <option value="Reunião de Jovens e Menores com os Pais">Reunião de Jovens e Menores com os Pais</option>
-                                        <option value="Ensaio Regional">Ensaio Regional</option>
+                                        <option value="BATISMO">Batismo</option>
+                                        <option value="SANTA CEIA">Santa Ceia</option>
+                                        <option value="REUNIÃO DE MOCIDADE">Reunião de Mocidade</option>
+                                        <option value="REUNIÃO DE JOVENS E MENORES COM OS PAIS">Reunião de Jovens e Menores com os Pais</option>
+                                        <option value="ENSAIO REGIONAL">Ensaio Regional</option>
                                     </select>
                                 </div>
                             </div>

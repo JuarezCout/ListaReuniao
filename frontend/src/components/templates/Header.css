@@ -1,5 +1,5 @@
 header.header {
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.1);
     padding: 0px 15px;
     overflow: hidden;
     white-space: nowrap;

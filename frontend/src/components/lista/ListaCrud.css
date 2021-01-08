@@ -1,3 +1,37 @@
-Container {
-    border: 2px black;
+p {
+    text-align: center;
+    font-size: 17px;
+}
+
+#obs_prev {  
+    word-wrap: break-word;
+    text-align: left;
+}
+
+#header {
+    text-align: center;
+}
+
+label {
+    text-align: center;
+}
+
+#reuniao {
+    text-align: center;
+}
+
+h2, h3, h4 {
+    font-weight: bolder;
+}
+
+.form-control {
+    margin: 15px 0;
+  font-size: 16px;
+  padding: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: rgba(20, 20, 20, .2);
+  color: white;
+  outline: none;
 }

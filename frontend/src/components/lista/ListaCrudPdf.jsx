@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
 import './ListaCrudPdf.css'
+import csspdf from '../printPdf.css'
 import axios from 'axios'
 import Main from '../templates/Main'
 import { Container, Row, Col } from 'reactstrap'
@@ -8,8 +9,7 @@ import header_img from "../../assets/imgs/header.PNG"
 
 const headerProps = {
 	icon: 'listas',
-	title: 'PDF',
-	subtitle: 'dfbd'
+	title: 'Exibição de Lista para PDF',
 }
 
 const baseUrl = 'http://localhost:3001/listas'
@@ -22,12 +22,14 @@ function ListaCrudPdf() {
 	document.title = "Listas para Reuniões"
 
 	const [inputListas, setInputLista] = useState(
-		[{ data: setDate(), localidades: [] }]
+		[]
 	);
 
-	useEffect(() => {
+	let listas = [1, 2]
 
-		testAxios()
+	useEffect(async () => {
+		console.log("Eae")
+		await testAxios()
 
 	}, []);
 
@@ -35,313 +37,213 @@ function ListaCrudPdf() {
 		var n = new Date();
 		var y = n.getFullYear();
 		var m = n.getMonth() + 1;
+		if (m < 10) m = "0" + m
 		var d = n.getDate();
+		if (d < 10) d = "0" + d
 		var data = d + "/" + m + "/" + y
 
 		return data
 	}
 
-	
-
-	async function axiosTest() {
-		const url = 'http://localhost:3001/listas'
-		const response = await axios.get(url)
-
-		console.log(response.data[23])
-		
-		return response.then(dados => dados.data[23])
-	}
 
 	function testAxios() {
 		const url = 'http://localhost:3001/listas'
 
 		axios(url)
 			.catch(error => console.error('Error:', error))
-			.then(response => 
-				response.data[response.data.length - 1]
-			) 
-			.then(response => 
-				console.log("response", response)
-				//setInputLista(response)
-			) 
+			.then(response =>
+				setInputLista(response.data)
+			)
 
+	}
+
+	function printPDF() {
+
+		var fileref = document.createElement("link");
+		fileref.setAttribute("rel", "stylesheet");
+		fileref.setAttribute("type", "text/css");
+		fileref.setAttribute("href", csspdf);
+		console.log(fileref)
+
+		var divContents = document.getElementById("toPdf").innerHTML;
+		var printWindow = window.open('', '', 'height=400,width=800');
+		printWindow.document.write('<html><head>');
+		printWindow.document.write(fileref);
+		printWindow.document.getElementsByTagName("head")[0].appendChild(fileref);
+		printWindow.document.write('</head><body >');
+		printWindow.document.write(divContents);
+		printWindow.document.write('</body></html>');
+		printWindow.document.close();
+		printWindow.print();
+		console.log(printWindow)
 	}
 
 	//Função para renderização do conteudo
 	function renderForm() {
 
-		console.log("Eae")
+		console.log("Listaass", inputListas)
+		if (inputListas.length > 2) {
+			return (
+				<Container id="toPdf">
+					<Row>
+						{listas.map((lista, id) => (
 
-		return (
-		<Container>
-				{/* {/*  */}
-				<Row>
-					<Col>
-						<p>EAEEE</p>
-					</Col>
-				</Row>
-				 <Row>
-					<Col xs='6'>
-						<table>
-							<thead>
-								<tr>
-									<img src={header_img} alt="" />
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										{inputListas && inputListas.localidades.map((inputLocalidade, index_l) => (
-											<table>
-												<thead>
-													<tr>
-														<th id='localidade'>
-															{inputLocalidade.nome}
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
+							<Col xs='6'>
+								<table>
+									<thead>
+										<tr>
+											<div>
+												<div id="head1">CONGREGAÇÃO CRISTÃ NO BRASIL</div >
+												<div id="head2">Rua Pastor Samuel Munguba, 1000 - Fortaleza/CE- Fone: (85) 3223-8082</div >
+												<div id="head3">Reunião Geral do Ministério Regional - {inputListas[inputListas.length - 1].data} </div >
+												<div id="head4">Lista de Batismos, Santas Ceias e Diversos</div >
+											</div>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												{inputListas[inputListas.length - 1] && inputListas[inputListas.length - 1].localidades.map((inputLocalidade, index_l) => (
+													<table>
+														<thead>
+															<tr>
+																<th id='localidade'>
+																	{inputLocalidade.nome}
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
 
-															{inputLocalidade.servicos && inputLocalidade.servicos.map((inputServico, index_s) => (
-																<table>
-																	<thead>
-																		<tr>
-																			<th id='servico'>{inputServico.nome}</th>
-																		</tr>
-																	</thead>
+																	{inputLocalidade.servicos && inputLocalidade.servicos.map((inputServico, index_s) => (
+																		<table>
+																			<thead>
+																				<tr>
+																					<th id='servico'>{inputServico.nome}</th>
+																				</tr>
+																			</thead>
 
-																	<tbody  >
-																		<tr>
-																			<td>
-																				{inputServico.reunioes && inputServico.reunioes.map((inputReuniao, index_r) => (
-																					<table>
-																						<thead>
-																							<tr>
-																								<th id='reuniao'>DATA</th>
-																								<th id='reuniao'>DIA</th>
-																								<th id='reuniao'>HORA</th>
-																								<th id='reuniao'>LOCAL</th>
-																								<th id='reuniao'>ANCIAO</th>
-																							</tr>
-																						</thead>
+																			<tbody >
+																				<tr>
+																					<td>
+																						<table>
+																							<thead>
+																								<tr>
+																									<th id='reuniao'>DATA</th>
+																									<th id='reuniao'>DIA</th>
+																									<th id='reuniao'>HORA</th>
+																									<th id='reuniao'>LOCAL</th>
+																									<th id='reuniao'>ANCIAO</th>
+																								</tr>
+																							</thead>
 
-																						<tbody>
-																							<tr>
-																								<td>{inputReuniao.data}</td>
-																								<td>{inputReuniao.dia}</td>
-																								<td>{inputReuniao.hora}</td>
-																								<td>{inputReuniao.local}</td>
-																								<td>{inputReuniao.anciao}</td>
-																							</tr>
-																						</tbody>
-																					</table>
-																				))}
-																			</td>
-																		</tr>
-																	</tbody>
-																</table>
-															))}
-															<table>
-																<thead>
-																	<tr>
-																		<th id='diversos'>DIVERSOS</th>
-																	</tr>
-																</thead>
+																							<tbody>
 
-																<tbody>
-																	<tr>
-																		<td>
-																			{inputLocalidade.diversos[0].obs && inputLocalidade.diversos[0].obs.map((inputObs, index_o) => (
-																				<p id='obs'>{inputObs.text_Obs}</p>
-																			))}
-
-																			{inputLocalidade.diversos[0].servicos_extras && inputLocalidade.diversos[0].servicos_extras.map((inputServicoExtra, index_se) => (
-																				<table>
-																					<thead>
-																						<tr>
-																							<th id='servico'>{inputServicoExtra.nome}</th>
-																						</tr>
-																					</thead>
-
-																					<tbody>
-																						<tr>
-																							<td>
-																								{inputServicoExtra.reunioes_extras && inputServicoExtra.reunioes_extras.map((inputReuniaoExtra, index_re) => (
-																									<table>
-																										<thead>
-																											<tr>
-																												<th>DATA</th>
-																												<th>DIA</th>
-																												<th>HORA</th>
-																												<th>LOCAL</th>
-																											</tr>
-																										</thead>
-
-																										<tbody>
-																											<tr>
-																												<td>{inputReuniaoExtra.data}</td>
-																												<td>{inputReuniaoExtra.dia}</td>
-																												<td>{inputReuniaoExtra.hora}</td>
-																												<td>{inputReuniaoExtra.local}</td>
-																											</tr>
-																										</tbody>
-																									</table>
+																								{inputServico.reunioes && inputServico.reunioes.map((inputReuniao, index_r) => (
+																									<tr>
+																										<td>{inputReuniao.data.charAt(8) + inputReuniao.data.charAt(9) + "/" + inputReuniao.data.charAt(5) + inputReuniao.data.charAt(6)}</td>
+																										<td>{inputReuniao.dia}</td>
+																										<td>{inputReuniao.hora}</td>
+																										<td>{inputReuniao.local}</td>
+																										<td>{inputReuniao.anciao}</td>
+																									</tr>
 																								))}
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			))}
-																		</td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										))}
-									</td>
+																							</tbody>
+																						</table>
 
-								</tr>
-							</tbody>
-						</table>
-					</Col>
-					<Col xs='6'>
-						<table>
-							<thead>
-								<tr>
-									<img src={header_img} alt="" />
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										{inputListas && inputListas.localidades.map((inputLocalidade, index_l) => (
-											<table>
-												<thead>
-													<tr>
-														<th id='localidade'>
-															{inputLocalidade.nome}
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
+																					</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	))}
+																	<br />
+																	<table>
+																		<thead>
+																			<tr>
+																				<th id='diversos'>DIVERSOS</th>
+																			</tr>
+																		</thead>
 
-															{inputLocalidade.servicos && inputLocalidade.servicos.map((inputServico, index_s) => (
-																<table>
-																	<thead>
-																		<tr>
-																			<th id='servico'>{inputServico.nome}</th>
-																		</tr>
-																	</thead>
+																		<tbody>
+																			<tr>
+																				<td>
+																					{inputLocalidade.diversos[0].obs && inputLocalidade.diversos[0].obs.map((inputObs, index_o) => (
+																						<container>
+																							<br />
+																							<a id="obs"> {inputObs.text_obs} </a>
+																						</container>
+																					))}
+																					<br />
 
-																	<tbody  >
-																		<tr>
-																			<td>
-																				{inputServico.reunioes && inputServico.reunioes.map((inputReuniao, index_r) => (
-																					<table>
-																						<thead>
-																							<tr>
-																								<th id='reuniao'>DATA</th>
-																								<th id='reuniao'>DIA</th>
-																								<th id='reuniao'>HORA</th>
-																								<th id='reuniao'>LOCAL</th>
-																								<th id='reuniao'>ANCIAO</th>
-																							</tr>
-																						</thead>
+																					{inputLocalidade.diversos[0].servicos_extras && inputLocalidade.diversos[0].servicos_extras.map((inputServicoExtra, index_se) => (
+																						<table>
+																							<thead>
+																								<tr>
+																									<th id='servico'>{inputServicoExtra.nome}</th>
+																								</tr>
+																							</thead>
 
-																						<tbody>
-																							<tr>
-																								<td>{inputReuniao.data}</td>
-																								<td>{inputReuniao.dia}</td>
-																								<td>{inputReuniao.hora}</td>
-																								<td>{inputReuniao.local}</td>
-																								<td>{inputReuniao.anciao}</td>
-																							</tr>
-																						</tbody>
-																					</table>
-																				))}
-																			</td>
-																		</tr>
-																	</tbody>
-																</table>
-															))}
-															<table>
-																<thead>
-																	<tr>
-																		<th id='diversos'>DIVERSOS</th>
-																	</tr>
-																</thead>
+																							<tbody>
+																								<tr>
+																									<td>
+																										<table>
+																											<thead>
+																												<tr>
+																													<th id='reuniao'>DATA</th>
+																													<th id='reuniao'>DIA</th>
+																													<th id='reuniao'>HORA</th>
+																													<th id='reuniao'>LOCAL</th>
+																												</tr>
+																											</thead>
 
-																<tbody>
-																	<tr>
-																		<td>
-																			{inputLocalidade.diversos[0].obs && inputLocalidade.diversos[0].obs.map((inputObs, index_o) => (
-																				<p id='obs'>{inputObs.text_Obs}</p>
-																			))}
+																											<tbody>
+																												{inputServicoExtra.reunioes_extras && inputServicoExtra.reunioes_extras.map((inputReuniaoExtra, index_re) => (
+																													<tr>
+																														<td>{inputReuniaoExtra.data.charAt(8) + inputReuniaoExtra.data.charAt(9) + "/" + inputReuniaoExtra.data.charAt(5) + inputReuniaoExtra.data.charAt(6)}</td>
+																														<td>{inputReuniaoExtra.dia}</td>
+																														<td>{inputReuniaoExtra.hora}</td>
+																														<td>{inputReuniaoExtra.local}</td>
+																													</tr>
+																												))}
+																											</tbody>
+																										</table>
+																									</td>
+																								</tr>
+																							</tbody>
+																						</table>
+																					))}
+																					<br />
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												))}
+											</td>
 
-																			{inputLocalidade.diversos[0].servicos_extras && inputLocalidade.diversos[0].servicos_extras.map((inputServicoExtra, index_se) => (
-																				<table>
-																					<thead>
-																						<tr>
-																							<th id='servico'>{inputServicoExtra.nome}</th>
-																						</tr>
-																					</thead>
+										</tr>
+									</tbody>
+								</table>
+							</Col>
 
-																					<tbody>
-																						<tr>
-																							<td>
-																								{inputServicoExtra.reunioes_extras && inputServicoExtra.reunioes_extras.map((inputReuniaoExtra, index_re) => (
-																									<table>
-																										<thead>
-																											<tr>
-																												<th>DATA</th>
-																												<th>DIA</th>
-																												<th>HORA</th>
-																												<th>LOCAL</th>
-																											</tr>
-																										</thead>
+						))}
+					</Row>
+					<Row>
+						<Col>
+							<button class="btn-btn-success" onClick={printPDF}>Download</button>
+						</Col>
+					</Row>
 
-																										<tbody>
-																											<tr>
-																												<td>{inputReuniaoExtra.data}</td>
-																												<td>{inputReuniaoExtra.dia}</td>
-																												<td>{inputReuniaoExtra.hora}</td>
-																												<td>{inputReuniaoExtra.local}</td>
-																											</tr>
-																										</tbody>
-																									</table>
-																								))}
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																			))}
-																		</td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										))}
-									</td>
+				</Container>
 
-								</tr>
-							</tbody>
-						</table>
-					</Col>
-				</Row> 
+			)
+		}
 
-			</Container> 
 
-		)
 
 
 

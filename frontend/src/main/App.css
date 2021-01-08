@@ -13,7 +13,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* Layout do Grid */
@@ -32,6 +32,7 @@
         "menu footer";
     height: 100vh;
     background-color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 aside.logo {

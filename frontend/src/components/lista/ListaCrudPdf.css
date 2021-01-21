@@ -14,16 +14,21 @@ td, th {
 #servico {
     font-size: 17px;
     width: 500px;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 #diversos {
     font-size: 23px;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 #reuniao {
-    border: 1px solid black;
+    border: 2px solid black;
+}
+
+#reuniao_anc {
+  border: 2px solid black;
+  width: 130px;
 }
 
   img {
@@ -31,18 +36,31 @@ td, th {
   }
 
 #obs {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
-  white-space: normal;
   display:block;
 
-  border: 1px solid black;
-    font-size: 15px;
+  border: 2px solid black;
+  font-size: 15px;
+
+}
+
+#obs_se {
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+#col_c {
+  margin-left: 0px;
+  align-content: center;
+  align-items: center;
+  align-self: center;
 }
 
   table {
-    width: 500px;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+    table-layout:fixed;
     border-collapse: collapse;
   }
 
@@ -51,27 +69,23 @@ td, th {
     font-size: 18px;
     text-decoration:underline ;
     text-align: center;
-    padding: 0;
 
   }
 
   #head2 {
     text-align: center;
     font-size: 12px;
-    padding: 0;
 
   }
   #head3 {
     text-align: center;
     font-size: 15px;
     font-weight: bolder;
-    padding: 0;
 
   }
   #head4 {
     text-align: center;
     font-size: 15px;
     font-weight: bolder;
-    padding: 0;
 
   }

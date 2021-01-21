@@ -642,6 +642,1260 @@
         }
       ],
       "id": 15
+    },
+    {
+      "data": "10/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "REUNIÃO DE MOCIDADE",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-12",
+                  "dia": "qui",
+                  "hora": "15:30",
+                  "local": "Central",
+                  "anciao": "Alaecio"
+                },
+                {
+                  "id": 2,
+                  "data": "2021-01-14",
+                  "dia": "qui",
+                  "hora": "15:00",
+                  "local": "Messejana",
+                  "anciao": "Bezerra"
+                },
+                {
+                  "id": 1,
+                  "data": "2021-01-15",
+                  "dia": "sex",
+                  "hora": "16:00",
+                  "local": "Pacajus",
+                  "anciao": "Mauricio"
+                }
+              ]
+            },
+            {
+              "id": 1,
+              "nome": "ENSAIO REGIONAL",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-11",
+                  "dia": "sex",
+                  "hora": "16:00",
+                  "local": "Central",
+                  "anciao": "Alvino"
+                }
+              ]
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO - ASSEMBLEIA GERAL ORDINARIA",
+                  "reunioes_extras": [
+                    {
+                      "id": 0,
+                      "data": "2021-01-10",
+                      "dia": "seg",
+                      "hora": "16:00",
+                      "local": "Central"
+                    },
+                    {
+                      "id": 1,
+                      "data": "2021-01-12",
+                      "dia": "sab",
+                      "hora": "17:00",
+                      "local": "Joao XXIII"
+                    }
+                  ]
+                }
+              ],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "COLETA PARA DESPESAS DE REUNIÕES: Todo Fruto que Deus preparar no útlimo culto do mês de janeiro nas casas de oração da Administração de Fortaleza será destinado à coleta para despesas de reuniões e assembleias."
+                },
+                {
+                  "id": 1,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "nome": "Demais Localidades",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "ENSAIO REGIONAL",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-11",
+                  "dia": "seg",
+                  "hora": "17:00",
+                  "local": "Sobral",
+                  "anciao": "Isaias Grillo"
+                }
+              ]
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 16
+    },
+    {
+      "data": "10/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 17
+    },
+    {
+      "data": "10/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "BATISMO",
+              "reunioes": []
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 18
+    },
+    {
+      "data": "10/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "BATISMO",
+              "reunioes": [
+                {
+                  "id": 3,
+                  "data": "2021-01-10",
+                  "dia": "qua",
+                  "hora": "10:50",
+                  "local": "Central",
+                  "anciao": "Alaecio",
+                  "obs": ""
+                },
+                {
+                  "id": 5,
+                  "data": "2021-01-11",
+                  "dia": "sex",
+                  "hora": "22:52",
+                  "local": "aaa",
+                  "anciao": "aaaa"
+                }
+              ]
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [
+                    {
+                      "id": 0,
+                      "data": "2021-01-10",
+                      "dia": "qua",
+                      "hora": "10:50",
+                      "local": "Central"
+                    }
+                  ]
+                }
+              ],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 19
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "11/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 20
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "12/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 21
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "12/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 22
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "12/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 23
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "13/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 24
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "13/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 25
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "13/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 26
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "13/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 27
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "13/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 28
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "13/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 29
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "13/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 30
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "13/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 31
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "16/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "BATISMO",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-16",
+                  "dia": "seg",
+                  "hora": "15:30",
+                  "local": "Central",
+                  "anciao": "Alaecio"
+                },
+                {
+                  "id": 4,
+                  "data": "2021-01-16",
+                  "dia": "seg",
+                  "hora": "21:57",
+                  "local": "aaaa",
+                  "anciao": "aaaa"
+                },
+                {
+                  "id": 3,
+                  "data": "2021-01-16",
+                  "dia": "seg",
+                  "hora": "22:57",
+                  "local": "fffff",
+                  "anciao": "fffff"
+                },
+                {
+                  "id": 2,
+                  "data": "2021-01-17",
+                  "dia": "ter",
+                  "hora": "17:30",
+                  "local": "Central",
+                  "anciao": "Bezerra"
+                },
+                {
+                  "id": 1,
+                  "data": "2021-01-18",
+                  "dia": "qua",
+                  "hora": "19:30",
+                  "local": "Central",
+                  "anciao": "Mauricio"
+                }
+              ]
+            },
+            {
+              "id": 1,
+              "nome": "SANTA CEIA",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-16",
+                  "dia": "ter",
+                  "hora": "21:57",
+                  "local": "Messejana ",
+                  "anciao": "Alaecio"
+                }
+              ]
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [
+                    {
+                      "id": 0,
+                      "data": "2021-01-16",
+                      "dia": "seg",
+                      "hora": "21:58",
+                      "local": "Central"
+                    }
+                  ]
+                }
+              ],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "aaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanat"
+                },
+                {
+                  "id": 1,
+                  "text_obs": "aaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanat"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "nome": "Demais Localidades",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "SANTA CEIA",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-16",
+                  "dia": "qui",
+                  "hora": "22:57",
+                  "local": "aaaa",
+                  "anciao": "aaaa"
+                }
+              ]
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "ADVSVAVSDVADFVADFFBDSBFHFYMYIKFYIKFUKIYUJDTJYSTE"
+                },
+                {
+                  "id": 1,
+                  "text_obs": "ADVSVAVSDVADFVADFFBDSBFHFYMYIKFYIKFUKIYUJDTJYSTE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 32
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "16/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "BATISMO",
+              "reunioes": [
+                {
+                  "id": 1,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "08:30",
+                  "local": "central",
+                  "anciao": "Alaecio"
+                },
+                {
+                  "id": 0,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "09:00",
+                  "local": "Central",
+                  "anciao": "Alaecio"
+                }
+              ]
+            },
+            {
+              "id": 1,
+              "nome": "REUNIÃO DE MOCIDADE",
+              "reunioes": [
+                {
+                  "id": 1,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "14:30",
+                  "local": "Joao XXlll",
+                  "anciao": "Josiel"
+                },
+                {
+                  "id": 0,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "15:00",
+                  "local": "Barra do Ceara",
+                  "anciao": "Samuel"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "nome": "ENSAIO REGIONAL",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "09:00",
+                  "local": "Agua Fria",
+                  "anciao": "Normando/Marcio"
+                },
+                {
+                  "id": 1,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "14:00",
+                  "local": "Central",
+                  "anciao": "Jeova/Samuel"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "nome": "CULTO PARA JOVENS",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "18:00",
+                  "local": "Parque 2 irmãos",
+                  "anciao": "Samuel Eugenio"
+                },
+                {
+                  "id": 1,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "18:30",
+                  "local": "Luciano Cavalcante",
+                  "anciao": "Joao"
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "nome": "REUNIÃO DE JOVENS E MENORES COM OS PAIS",
+              "reunioes": [
+                {
+                  "id": 0,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "10:00",
+                  "local": "Sao Miguel",
+                  "anciao": "Alvino"
+                },
+                {
+                  "id": 1,
+                  "data": "2021-01-17",
+                  "dia": "dom",
+                  "hora": "10:30",
+                  "local": "Messejana",
+                  "anciao": "Jonas"
+                }
+              ]
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "COLETA PARA DESPESAS DE REUNIÕES: Todo Fruto que Deus preparar no útlimo culto do mês de janeiro nas casas de oração da Administração de Fortaleza será destinado à coleta para despesas de reuniões e assembleias."
+                },
+                {
+                  "id": 1,
+                  "text_obs": "REUNIÃO PARA CRIANÇAS: Todos os Sábados às 19h30, há reuniões para crianças de 04 à 12 anos na Central de Fortaleza (no salão de reunião)."
+                },
+                {
+                  "id": 2,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 33
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "16/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "BATISMO",
+              "reunioes": []
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO - ASSEMBLEIA GERAL ORDINARIA",
+                  "reunioes_extras": [
+                    {
+                      "id": 0,
+                      "data": "2021-01-16",
+                      "dia": "qua",
+                      "hora": "13:00",
+                      "local": "Central"
+                    }
+                  ]
+                }
+              ],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "COLETA PARA DESPESAS DE REUNIÕES: Todo Fruto que Deus preparar no útlimo culto do mês de janeiro nas casas de oração da Administração de Fortaleza será destinado à coleta para despesas de reuniões e assembleias."
+                },
+                {
+                  "id": 1,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 34
+    },
+    {
+      "nome": "",
+      "data": "19/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "REUNIÃO DE JOVENS E MENORES COM OS PAIS",
+              "reunioes": []
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "aaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanat"
+                },
+                {
+                  "id": 1,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h."
+                },
+                {
+                  "id": 2,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 35
+    },
+    {
+      "nome": "",
+      "data": "19/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "BATISMO",
+              "reunioes": []
+            },
+            {
+              "id": 1,
+              "nome": "ENSAIO REGIONAL",
+              "reunioes": []
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "nome": "Demais Localidades",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "BATISMO",
+              "reunioes": []
+            },
+            {
+              "id": 1,
+              "nome": "REUNIÃO DE MOCIDADE",
+              "reunioes": []
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 36
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "19/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h."
+                },
+                {
+                  "id": 1,
+                  "text_obs": "aaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanat",
+                  "negrito": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 37
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "19/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "aaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanat",
+                  "negrito": true
+                },
+                {
+                  "id": 1,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                  "negrito": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 38
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "aaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanataaadgstgsgabrarerbbarthsrthbarvaeravavrsrbaebarbarbabsdbadbanat",
+                  "negrito": true
+                },
+                {
+                  "id": 1,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                  "negrito": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 39
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [
+            {
+              "id": 0,
+              "nome": "ENSAIO REGIONAL",
+              "reunioes": []
+            },
+            {
+              "id": 1,
+              "nome": "BATISMO",
+              "reunioes": []
+            }
+          ],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [],
+                  "obs": []
+                }
+              ],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                  "negrito": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 40
+    },
+    {
+      "nome": "Reunião Geral do Ministério",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                  "negrito": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 41
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [],
+              "obs": [
+                {
+                  "id": 0,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                  "negrito": false
+                },
+                {
+                  "id": 1,
+                  "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                  "negrito": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": 42
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [],
+                  "obs": []
+                }
+              ],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 43
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [],
+                  "obs": []
+                }
+              ],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 44
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [],
+                  "obs": []
+                }
+              ],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 45
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [],
+                  "obs": []
+                }
+              ],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 46
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [],
+                  "obs": [
+                    {
+                      "id": 0,
+                      "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                      "negrito": false
+                    }
+                  ]
+                }
+              ],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 47
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [],
+                  "obs": [
+                    {
+                      "id": 0,
+                      "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                      "negrito": false
+                    },
+                    {
+                      "id": 1,
+                      "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                      "negrito": false
+                    },
+                    {
+                      "id": 2,
+                      "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                      "negrito": true
+                    }
+                  ]
+                }
+              ],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 48
+    },
+    {
+      "nome": "",
+      "data": "20/01/2021",
+      "localidades": [
+        {
+          "id": 0,
+          "nome": "Fortaleza",
+          "servicos": [],
+          "diversos": [
+            {
+              "servicos_extras": [
+                {
+                  "id": 0,
+                  "nome": "AGO",
+                  "reunioes_extras": [
+                    {
+                      "id": 0,
+                      "data": "2021-01-20",
+                      "dia": "seg",
+                      "hora": "15:30",
+                      "local": "Central"
+                    },
+                    {
+                      "id": 2,
+                      "data": "2021-01-20",
+                      "dia": "seg",
+                      "hora": "16:30",
+                      "local": "Joao XXIII"
+                    },
+                    {
+                      "id": 1,
+                      "data": "2021-01-20",
+                      "dia": "seg",
+                      "hora": "17:30",
+                      "local": "Messejana"
+                    }
+                  ],
+                  "obs": [
+                    {
+                      "id": 0,
+                      "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                      "negrito": false
+                    },
+                    {
+                      "id": 1,
+                      "text_obs": "A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h. A reunião para mocidade em Maranguape foi transferida do dia 19/01 para o dia 02/02 às 09 h.",
+                      "negrito": false
+                    }
+                  ]
+                }
+              ],
+              "obs": []
+            }
+          ]
+        }
+      ],
+      "id": 49
     }
   ]
 }

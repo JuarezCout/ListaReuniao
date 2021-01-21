@@ -1,11 +1,17 @@
 p {
     text-align: center;
     font-size: 17px;
+    padding-bottom: 0;
+}
+
+input {
+    padding-top: 0x;
 }
 
 #obs_prev {  
-    word-wrap: break-word;
+    white-space: pre-wrap;
     text-align: left;
+    align-content: left;
 }
 
 #header {

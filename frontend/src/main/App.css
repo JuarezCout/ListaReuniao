@@ -20,17 +20,20 @@
 .app {
     margin: 0px;
     display: grid;
-    grid-template-columns: var(--aside-width) 1fr;
+    grid-template-columns: var(--aside-width) auto;
     grid-template-rows: 
         var(--header-height)
+        32px
         1fr
         var(--footer-height);
     
     grid-template-areas: 
         "logo header"
-        "menu content"
-        "menu footer";
+        "menu menu"
+        "content content"
+        "footer footer";
     height: 100vh;
+    margin: 0%;
     background-color: white;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

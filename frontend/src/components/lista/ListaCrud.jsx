@@ -9,7 +9,7 @@ import { Container, Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup';
 
-const headerProps = {
+let headerProps = {
     icon: 'listas',
     title: 'Criação de Lista',
     subtitle: ''
@@ -21,8 +21,12 @@ export default ListaCrud;
 
 function ListaCrud() {
 
+    const [inputListasExtras, setInputListaExtras] = useState(
+        []
+    );
+
     const [inputListas, setInputLista] = useState(
-        [{ data: setDate(), localidades: [] }]
+        [{ nome: '', data: setDate(), localidades: [] }]
     );
 
     const [inputId, setInputId] = useState(0)
@@ -36,22 +40,34 @@ function ListaCrud() {
     useEffect(() => {
 
         let values = { ...inputListas };
-        console.log(values)
         if (values[0].localidades.length != 0) {
             setInputDisabled(false)
             var obj = values[0]
-            console.log(values)
             const method = inputId ? 'put' : 'post'
             const url = inputId ? `${baseUrl}/${inputId}` : baseUrl
 
             axios[method](url, obj)
                 .catch(error => console.error('Error:', error))
                 .then(response => setInputId(response.data.id))
-
-            console.log("Id", inputId)
         }
 
     }, [inputListas]);
+
+    useEffect(async () => {
+        await testAxios()
+
+    }, []);
+
+    function testAxios() {
+        const url = 'http://localhost:3001/listas'
+
+        axios(url)
+            .catch(error => console.error('Error:', error))
+            .then(response =>
+                setInputListaExtras(response.data)
+            )
+
+    }
 
     //Funções para uso de dados aleatorios
 
@@ -72,10 +88,30 @@ function ListaCrud() {
         return nomeId + id_l.toString() + id_s.toString();
     }
 
-    function handleChange(event) {
-
+    function ifEnsaio(index_l, index_s) {
+        let values = { ...inputListas };
+        if (values[0].localidades[index_l].servicos[index_s].nome === "ENSAIO REGIONAL") {
+            return "Encarregado/Ancião"
+        } else {
+            return "Ancião"
+        }
     }
 
+    //Funcao para alterar nome de reuniao
+    function handleAddNomeReuniao(nome) {
+        let values = { ...inputListas };
+        if (!nome) {
+            alert("Preencher campo Nome de Reuniao")
+
+        } else {
+
+            let id = values[0].localidades.length
+            headerProps.subtitle = nome
+            values[0].nome = nome
+            setInputLista(values)
+            document.getElementById("nome").value = ''
+        }
+    }
 
     //Funções para botões do campo Localidade
     function handleAddLocalidade(nome) {
@@ -123,18 +159,36 @@ function ListaCrud() {
     }
 
     //Funções para botões do campo Diversos
-    function handleAddObservacao(text_obs, index_l) {
+    function handleAddObservacao(text_obs, index_l, negrito) {
         if (!text_obs) {
             alert("Preencher campo Observacao")
 
         } else {
-
+            /* if (negrito.checked) {
+                document.getElementById("obs_prev").style.fontWeight = "bolder"
+            } */
             let values = { ...inputListas };
             let id = values[0].localidades[index_l].diversos[0].obs.length
-            values[0].localidades[index_l].diversos[0].obs.push({ id: id, text_obs: text_obs })
+            values[0].localidades[index_l].diversos[0].obs.push({ id: id, text_obs: text_obs, negrito: negrito.checked })
             setInputLista(values)
             document.getElementById(indexaId("text_obs", index_l, 0)).value = ''
         }
+    }
+
+    function handleRemoveObservacao(index_l, index_o) {
+        let values = { ...inputListas }
+        values[0].localidades[index_l].diversos[0].obs.splice(index_o, 1)
+        setInputLista(values)
+    }
+
+    function handleEditObservacao(index_l, index_o) {
+        let values = { ...inputListas }
+        let data = values[0].localidades[index_l].diversos[0].obs[index_o].text_obs
+
+        document.getElementById(indexaId("text_obs", index_l, 0)).value = data
+
+        values[0].localidades[index_l].diversos[0].obs.splice(index_o, 1)
+        setInputLista(values)
     }
 
     function handleAddServicoExtra(nome, index_l) {
@@ -145,9 +199,9 @@ function ListaCrud() {
 
             let values = { ...inputListas };
             let id = values[0].localidades[index_l].diversos[0].servicos_extras.length
-            values[0].localidades[index_l].diversos[0].servicos_extras.push({ id: id, nome: nome, reunioes_extras: [] })
+            values[0].localidades[index_l].diversos[0].servicos_extras.push({ id: id, nome: nome, reunioes_extras: [], obs: [] })
             setInputLista(values)
-            document.getElementById("nome_reuniao").value = ''
+            document.getElementById(indexaId("nome_reuniao", index_l, 0)).value = ''
         }
     }
 
@@ -159,7 +213,8 @@ function ListaCrud() {
             let values = { ...inputListas };
             let id = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras.length
             values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras.push({ id: id, data: data, dia: dia, hora: hora, local: local })
-            values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras.sort(compare)
+            values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras.sort(compareTime)
+            values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras.sort(compareDate)
             setInputLista(values)
             document.getElementById(indexaId("data_reuniao_e", index_l, index_se)).value = ''
             document.getElementById(indexaId("dia_reuniao_e", index_l, index_se)).value = ''
@@ -168,11 +223,7 @@ function ListaCrud() {
         }
     }
 
-    function handleRemoveObservacao(index_l, index_o) {
-        let values = { ...inputListas }
-        values[0].localidades[index_l].diversos[0].obs.splice(index_o, 1)
-        setInputLista(values)
-    }
+
 
     function handleRemoveServicoExtra(index_l, index_se) {
         let values = { ...inputListas }
@@ -187,8 +238,53 @@ function ListaCrud() {
         setInputLista(values)
     }
 
-    function handleEditDiverso(index_l, index_s) {
+    function handleEditReuniaoExtra(index_l, index_se, index_re) {
+        let values = { ...inputListas }
+        let data = values[0].localidades[index_l].servicos[index_se].reunioes[index_re].data
 
+
+        document.getElementById(indexaId("data_reuniao_e", index_l, index_se)).value = data
+        document.getElementById(indexaId("dia_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].servicos[index_se].reunioes[index_re].dia
+        document.getElementById(indexaId("hora_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].servicos[index_se].reunioes[index_re].hora
+        document.getElementById(indexaId("local_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].servicos[index_se].reunioes[index_re].local
+
+        values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras.splice(index_re, 1)
+        setInputLista(values)
+    }
+
+    function handleAddObservacaoSE(text_obs, index_l, index_se, negrito) {
+        if (!text_obs) {
+            alert("Preencher campo Observacao de Serviço")
+
+        } else {
+            /* if (negrito.checked) {
+                document.getElementById("obs_prev").style.fontWeight = "bolder"
+            } */
+            console.log(text_obs)
+            let values = { ...inputListas };
+            let id = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].obs.length
+            console.log(values[0].localidades[index_l].diversos[0].servicos_extras[index_se])
+            values[0].localidades[index_l].diversos[0].servicos_extras[index_se].obs.push({ id: id, text_obs: text_obs, negrito: negrito.checked })
+            console.log(values)
+            setInputLista(values)
+            document.getElementById(indexaId("text_obs_se", index_l, index_se)).value = ''
+        }
+    }
+
+    function handleRemoveObservacaoSE(index_l, index_o) {
+        let values = { ...inputListas }
+        values[0].localidades[index_l].diversos[0].obs.splice(index_o, 1)
+        setInputLista(values)
+    }
+
+    function handleEditObservacaoSE(index_l, index_o) {
+        let values = { ...inputListas }
+        let data = values[0].localidades[index_l].diversos[0].obs[index_o].text_obs
+
+        document.getElementById(indexaId("text_obs", index_l, 0)).value = data
+
+        values[0].localidades[index_l].diversos[0].obs.splice(index_o, 1)
+        setInputLista(values)
     }
 
 
@@ -208,7 +304,8 @@ function ListaCrud() {
                 local: local,
                 anciao: anciao
             })
-            values[0].localidades[index_l].servicos[index_s].reunioes.sort(compare)
+            values[0].localidades[index_l].servicos[index_s].reunioes.sort(compareTime)
+            values[0].localidades[index_l].servicos[index_s].reunioes.sort(compareDate)
             setInputLista(values)
             document.getElementById(indexaId("data_reuniao", index_l, index_s)).value = ''
             document.getElementById(indexaId("dia_reuniao", index_l, index_s)).value = ''
@@ -224,13 +321,22 @@ function ListaCrud() {
         setInputLista(values)
     }
 
-    function compare(a, b) {
-    
+    function compareDate(a, b) {
+
         let aData = new Date(a.data)
         let bData = new Date(b.data)
 
         return aData - bData;
     }
+
+    function compareTime(a, b) {
+
+        let aData = Number(a.hora.split(':')[0]) * 60 * 1000 + Number(a.hora.split(':')[1]) * 1000;
+        let bData = Number(b.hora.split(':')[0]) * 60 * 1000 + Number(b.hora.split(':')[1]) * 1000;
+
+        return aData - bData;
+    }
+
 
     function handleEditReuniao(index_l, index_s, index_r) {
         let values = { ...inputListas }
@@ -255,7 +361,7 @@ function ListaCrud() {
         return (
             <Container className="form">
 
-{/* 
+                {/* 
                 <Row>
                     <Col xs="12" className="form-group">
                         <h1 id="reuniao">Reunião do dia: {date}</h1>
@@ -264,11 +370,30 @@ function ListaCrud() {
 
                 <Row>
                     <Col xs="8" className="form-group">
-                        <h2 htmlFor="local">Localidade</h2>
-                        <input type="text" className="form-control" id="local" onChange={handleChange} />
+                        <h2 htmlFor="nome">Nome da Reunião</h2>
+                        <select className="form-control" id="nome">
+                            <option value="Reunião Geral do Ministério">Reunião Geral do Ministério</option>
+                        </select>
                     </Col>
                     <Col xs="4" className="form-group">
-                        <br/>
+                        <br />
+                        <button className="btn btn-success"
+                            onClick={e => handleAddNomeReuniao(document.getElementById("nome").value)}>
+                            Alterar
+                        </button>
+                    </Col>
+                </Row>
+
+
+                <hr />
+
+                <Row>
+                    <Col xs="8" className="form-group">
+                        <h2 htmlFor="local">Localidade</h2>
+                        <input type="text" className="form-control" id="local" />
+                    </Col>
+                    <Col xs="4" className="form-group">
+                        <br />
                         <button className="btn btn-primary"
                             onClick={e => handleAddLocalidade(document.getElementById("local").value)}>
                             Adicionar
@@ -308,17 +433,18 @@ function ListaCrud() {
                         <div className="row">
                             <div className="col-8">
                                 <div className="form-group">
-                                    <select className="form-control" name="servicos" id="servicos">
+                                    <select className="form-control" name="servicos" id={indexaId("servicos", index_l, 0)}>
                                         <option value="BATISMO">Batismo</option>
                                         <option value="SANTA CEIA">Santa Ceia</option>
                                         <option value="REUNIÃO DE MOCIDADE">Reunião de Mocidade</option>
                                         <option value="REUNIÃO DE JOVENS E MENORES COM OS PAIS">Reunião de Jovens e Menores com os Pais</option>
                                         <option value="ENSAIO REGIONAL">Ensaio Regional</option>
+                                        <option value="CULTO PARA JOVENS">Culto para Jovens</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="col-4">
-                                <i className="fa fa-plus" onClick={() => handleAddServico(document.getElementById("servicos").value, index_l)}></i>
+                                <i className="fa fa-plus" onClick={() => handleAddServico(document.getElementById(indexaId("servicos", index_l, 0)).value, index_l)}></i>
                             </div>
                         </div>
 
@@ -329,12 +455,12 @@ function ListaCrud() {
                                 <hr />
 
                                 <div className="row" key={index_s}>
-                                    <div className="col-4">
+                                    <div className="col-10">
                                         <div className="form-group">
                                             <h3>{inputServico.nome}</h3>
                                         </div>
                                     </div>
-                                    <div className="col-4 col-sm-2">
+                                    <div className="col-2 col-sm-2">
                                         <i className="fa fa-trash" onClick={() => handleRemoveServico(index_l, index_s)}></i>
                                     </div>
                                 </div>
@@ -353,13 +479,13 @@ function ListaCrud() {
                                         <p>Localidade</p>
                                     </div>
                                     <div className="col-3">
-                                        <p>Ancião</p>
+                                        <p>{ifEnsaio(index_l, index_s)}</p>
                                     </div>
                                 </div>
 
                                 <div className="row">
                                     <div className="col-2">
-                                        <input type="date" className="form-control" id={indexaId("data_reuniao", index_l, index_s)} onChange={handleChange} />
+                                        <input type="date" className="form-control" id={indexaId("data_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-1">
                                         <select className="form-control" name="servicos" id={indexaId("dia_reuniao", index_l, index_s)}>
@@ -373,13 +499,13 @@ function ListaCrud() {
                                         </select>
                                     </div>
                                     <div className="col-2">
-                                        <input type="text" className="form-control" id={indexaId("hora_reuniao", index_l, index_s)} onChange={handleChange} />
+                                        <input type="time" className="form-control" id={indexaId("hora_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-3">
-                                        <input type="text" className="form-control" id={indexaId("local_reuniao", index_l, index_s)} onChange={handleChange} />
+                                        <input type="text" className="form-control" id={indexaId("local_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-3">
-                                        <input type="text" className="form-control" id={indexaId("anciao_reuniao", index_l, index_s)} onChange={handleChange} />
+                                        <input type="text" className="form-control" id={indexaId("anciao_reuniao", index_l, index_s)} />
                                     </div>
                                     <div className="col-1">
                                         <i className="fa fa-plus" onClick={() => handleAddReuniao(document.getElementById(indexaId("data_reuniao", index_l, index_s)).value,
@@ -396,7 +522,7 @@ function ListaCrud() {
                                         <hr />
                                         <div className="row" key={index_r}>
                                             <div className="col-2">
-                                                <label>{inputReuniao.data.charAt(8) + inputReuniao.data.charAt(9) + "/" + inputReuniao.data.charAt(5) + inputReuniao.data.charAt(6) }</label>
+                                                <label>{inputReuniao.data.charAt(8) + inputReuniao.data.charAt(9) + "/" + inputReuniao.data.charAt(5) + inputReuniao.data.charAt(6)}</label>
                                             </div>
                                             <div className="col-1">
                                                 <label>{inputReuniao.dia}</label>
@@ -441,10 +567,10 @@ function ListaCrud() {
 
                         <div className="row">
                             <div className="col-8">
-                                <input type="text" className="form-control" id="nome_reuniao" onChange={handleChange} />
+                                <input type="text" className="form-control" id={indexaId("nome_reuniao", index_l, 0)} />
                             </div>
                             <div className="col-4">
-                                <i className="fa fa-plus" onClick={() => handleAddServicoExtra(document.getElementById("nome_reuniao").value, index_l)}></i>
+                                <i className="fa fa-plus" onClick={() => handleAddServicoExtra(document.getElementById(indexaId("nome_reuniao", index_l, 0)).value, index_l)}></i>
                             </div>
                         </div>
                         {inputLocalidade.diversos[0].servicos_extras && inputLocalidade.diversos[0].servicos_extras.map((inputServicoExtra, index_se) => (
@@ -454,12 +580,12 @@ function ListaCrud() {
                                 <hr />
 
                                 <div className="row">
-                                    <div className="col-4">
+                                    <div className="col-8">
                                         <div className="form-group" key={index_se}>
                                             <h3>{inputServicoExtra.nome}</h3>
                                         </div>
                                     </div>
-                                    <div className="col-4 col-sm-2">
+                                    <div className="col-1 col-sm-2">
                                         <i className="fa fa-trash" onClick={() => handleRemoveServicoExtra(index_l, index_se)}></i>
                                     </div>
                                 </div>
@@ -481,7 +607,7 @@ function ListaCrud() {
 
                                 <div className="row">
                                     <div className="col-2">
-                                        <input type="date" className="form-control" id={indexaId("data_reuniao_e", index_l, index_se)} onChange={handleChange} />
+                                        <input type="date" className="form-control" id={indexaId("data_reuniao_e", index_l, index_se)} />
                                     </div>
                                     <div className="col-1">
                                         <select className="form-control" name="servicos" id={indexaId("dia_reuniao_e", index_l, index_se)}>
@@ -495,10 +621,10 @@ function ListaCrud() {
                                         </select>
                                     </div>
                                     <div className="col-2">
-                                        <input type="text" className="form-control" id={indexaId("hora_reuniao_e", index_l, index_se)} onChange={handleChange} />
+                                        <input type="time" className="form-control" id={indexaId("hora_reuniao_e", index_l, index_se)} />
                                     </div>
                                     <div className="col-4">
-                                        <input type="text" className="form-control" id={indexaId("local_reuniao_e", index_l, index_se)} onChange={handleChange} />
+                                        <input type="text" className="form-control" id={indexaId("local_reuniao_e", index_l, index_se)} />
                                     </div>
                                     <div className="col-1">
                                         <i className="fa fa-plus" onClick={() => handleAddReuniaoExtra(
@@ -509,8 +635,6 @@ function ListaCrud() {
                                             index_l, index_se)}></i>
                                     </div>
                                 </div>
-
-                                <hr />
 
                                 {inputServicoExtra.reunioes_extras && inputServicoExtra.reunioes_extras.map((inputReuniaoExtra, index_re) => (
                                     <div className="container">
@@ -527,15 +651,48 @@ function ListaCrud() {
                                             <div className="col-4">
                                                 <label>{inputReuniaoExtra.local}</label>
                                             </div>
-
                                             <div className="col-1">
-                                                <i className="fa fa-pencil" onClick={() => handleEditReuniao(index_l, index_se, index_re)}></i>
-                                                <i className="fa fa-trash" onClick={() => handleRemoveReuniao(index_l, index_se, index_re)}></i>
+                                                <i className="fa fa-pencil" onClick={() => handleEditReuniaoExtra(index_l, index_se, index_re)}></i>
+                                                <i className="fa fa-trash" onClick={() => handleRemoveReuniaoExtra(index_l, index_se, index_re)}></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                                <hr />
+                                <div className="row">
+                                    <div className="col-8">
+                                        <h5>Observações</h5>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-8">
+                                        <input type="text" className="form-control" id={indexaId("text_obs_se", index_l, index_se)} />
+                                    </div>
+                                    <div className="col-1">
+                                        <label for="negrito">  Negrito</label>
+                                        <input type="checkbox" id={indexaId("negrito", index_l, index_se)} name="negrito" />
+                                    </div>
+                                    <div className="col-3">
+                                        <i className="fa fa-plus" onClick={() => handleAddObservacaoSE(document.getElementById(indexaId("text_obs_se", index_l, index_se)).value, index_l, index_se, document.getElementById(indexaId("negrito", index_l, index_se)))}></i>
+                                    </div>
+                                </div>
+
+                                {inputServicoExtra.obs && inputServicoExtra.obs.map((inputObservacao, index_o) => (
+                                    <div className="container">
+                                        <br />
+                                        <div className="row">
+                                            <div className="col-11" id="obs_prev">
+                                                <p>{inputObservacao.text_obs}</p>
+                                            </div>
+                                            <div className="col-1">
+                                                <i className="fa fa-pencil" onClick={() => handleEditObservacaoSE(index_l, index_o, index_se)}></i>
+                                                <i className="fa fa-trash" onClick={() => handleRemoveObservacaoSE(index_l, index_o, index_se)}></i>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
+
                         ))}
 
                         <hr />
@@ -543,27 +700,34 @@ function ListaCrud() {
                         <div className="row">
                             <div className="col-8">
                                 <div className="form-group">
-                                    <h4>Observações</h4>
+                                    <h4>Observações Gerais</h4>
                                 </div>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-8">
-                                <input type="text" className="form-control" id={indexaId("text_obs", index_l, 0)} onChange={handleChange} />
+                                <input type="text" className="form-control" id={indexaId("text_obs", index_l, 0)} />
                             </div>
-                            <div className="col-4">
-                                <i className="fa fa-plus" onClick={() => handleAddObservacao(document.getElementById(indexaId("text_obs", index_l, 0)).value, index_l)}></i>
+                            <div className="col-1">
+                                <label for="negrito">  Negrito</label>
+                                <input type="checkbox" id="negrito" name="negrito" />
+                            </div>
+                            <div className="col-3">
+                                <i className="fa fa-plus" onClick={() => handleAddObservacao(document.getElementById(indexaId("text_obs", index_l, 0)).value, index_l, document.getElementById("negrito"))}></i>
                             </div>
                         </div>
-
 
                         {inputLocalidade.diversos[0].obs && inputLocalidade.diversos[0].obs.map((inputObservacao, index_o) => (
                             <div className="container">
                                 <br />
                                 <div className="row">
-                                    <div className="col-12">
+                                    <div className="col-11" id="obs_prev">
                                         <p id="obs_prev">{inputObservacao.text_obs}</p>
+                                    </div>
+                                    <div className="col-1">
+                                        <i className="fa fa-pencil" onClick={() => handleEditObservacao(index_l, index_o)}></i>
+                                        <i className="fa fa-trash" onClick={() => handleRemoveObservacao(index_l, index_o)}></i>
                                     </div>
                                 </div>
                             </div>

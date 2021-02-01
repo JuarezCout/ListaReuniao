@@ -46,6 +46,10 @@ function ListaCrudPdf() {
 		return data
 	}
 
+	function goBack() {
+		window.localStorage.setItem("voltar", 1)
+	}
+
 	function indexaId(nomeId, id_l, id_s) {
 		return nomeId + id_l.toString() + id_s.toString();
 	}
@@ -58,12 +62,6 @@ function ListaCrudPdf() {
 		}
 	}
 
-	/* 	for (let index = 0; index < obs.length; index++) {
-				if (obs[index].negrito) {
-					console.log(indexaId("obs", index, 0))
-					document.getElementById(indexaId("obs", index, 0)).style.fontWeight = "bolder"
-				}
-			} */
 	function ifNegrito(negrito, index) {
 		if (negrito && index) {
 			document.getElementById(index).style.fontWeight = "bolder"
@@ -83,39 +81,6 @@ function ListaCrudPdf() {
 	}
 
 	function printPDF() {
-
-		/* var doc = new jsPDF('p', 'in', 'letter');
-		var source = $('#toPdf').first();
-		var specialElementHandlers = {
-			'#bypassme': function (element, renderer) {
-				return true;
-			}
-		};
-
-		doc.fromHTML(
-			source, // HTML string or DOM elem ref.
-			0.5, // x coord
-			0.5, // y coord
-			{
-				'width': 7.5, // max width of content on PDF
-				'elementHandlers': specialElementHandlers
-			});
-
-		doc.output('dataurl'); */
-
-		/* // Choose the element that our invoice is rendered in.
-		const element = document.getElementById("toPdf");
-		console.log(element)
-		// Choose the element and save the PDF for our user.
-		html2pdf()
-			.set({
-				image: { type: 'jpg' },
-				html2canvas: { width: 960, dpi: 300 },
-				jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-			})
-			.from(element)
-			.save()  */
-
 
 		var style = "<style>";
 		style = style + "td, th {    text-align: left;    font-size: 14px;    word-wrap: break-word;    text-align: center;    padding: 0;  }"
@@ -280,7 +245,7 @@ function ListaCrudPdf() {
 																															<td id='reuniao'>{inputReuniaoExtra.dia}</td>
 																															<td id='reuniao'>{inputReuniaoExtra.hora}</td>
 																															<td id='reuniao'>{inputReuniaoExtra.local}</td>
-																														</tr>	
+																														</tr>
 																													))}
 																												</tbody>
 																											</table>
@@ -320,156 +285,16 @@ function ListaCrudPdf() {
 							</Col>
 
 						))}
-
-						{/* <Col xs='6' id="col_c">
-							<table>
-								<thead>
-									<tr>
-										<div>
-											<div id="head1">CONGREGAÇÃO CRISTÃ NO BRASIL</div >
-											<div id="head2">Rua Pastor Samuel Munguba, 1000 - Fortaleza/CE- Fone: (85) 3223-8082</div >
-											<div id="head3">{inputListas[inputListas.length - 1].nome} - {inputListas[inputListas.length - 1].data} </div >
-											<div id="head4">Lista de Batismos, Santas Ceias e Diversos</div >
-										</div>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											{inputListas[inputListas.length - 1] && inputListas[inputListas.length - 1].localidades.map((inputLocalidade, index_l) => (
-												<table>
-													<thead>
-														<tr>
-															<th id='localidade'>
-																{inputLocalidade.nome}
-															</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>
-
-																{inputLocalidade.servicos && inputLocalidade.servicos.map((inputServico, index_s) => (
-																	<table>
-																		<thead>
-																			<tr>
-																				<th id='servico'>{inputServico.nome}</th>
-																			</tr>
-																		</thead>
-
-																		<tbody >
-																			<tr>
-																				<td>
-																					<table>
-																						<thead>
-																							<tr>
-																								<th id='reuniao'>DATA</th>
-																								<th id='reuniao'>DIA</th>
-																								<th id='reuniao'>HORA</th>
-																								<th id='reuniao'>LOCAL</th>
-																								<th id='reuniao'>ANCIAO</th>
-																							</tr>
-																						</thead>
-
-																						<tbody>
-
-																							{inputServico.reunioes && inputServico.reunioes.map((inputReuniao, index_r) => (
-																								<tr>
-																									<td>{inputReuniao.data.charAt(8) + inputReuniao.data.charAt(9) + "/" + inputReuniao.data.charAt(5) + inputReuniao.data.charAt(6)}</td>
-																									<td>{inputReuniao.dia}</td>
-																									<td>{inputReuniao.hora}</td>
-																									<td>{inputReuniao.local}</td>
-																									<td>{inputReuniao.anciao}</td>
-																								</tr>
-																							))}
-																						</tbody>
-																					</table>
-
-																				</td>
-																			</tr>
-																		</tbody>
-																	</table>
-																))}
-																<br />
-																<table>
-																	<thead>
-																		<tr>
-																			<th id='diversos'>DIVERSOS</th>
-																		</tr>
-																	</thead>
-
-																	<tbody>
-																		<tr>
-																			<td>
-																				{inputLocalidade.diversos[0].obs && inputLocalidade.diversos[0].obs.map((inputObs, index_o) => (
-																					<container>
-																						<br />
-																						<a id="obs"> {inputObs.text_obs} </a>
-																					</container>
-																				))}
-																				<br />
-
-																				{inputLocalidade.diversos[0].servicos_extras && inputLocalidade.diversos[0].servicos_extras.map((inputServicoExtra, index_se) => (
-																					<table>
-																						<thead>
-																							<tr>
-																								<th id='servico'>{inputServicoExtra.nome}</th>
-																							</tr>
-																						</thead>
-
-																						<tbody>
-																							<tr>
-																								<td>
-																									<table>
-																										<thead>
-																											<tr>
-																												<th id='reuniao'>DATA</th>
-																												<th id='reuniao'>DIA</th>
-																												<th id='reuniao'>HORA</th>
-																												<th id='reuniao'>LOCAL</th>
-																											</tr>
-																										</thead>
-
-																										<tbody>
-																											{inputServicoExtra.reunioes_extras && inputServicoExtra.reunioes_extras.map((inputReuniaoExtra, index_re) => (
-																												<tr>
-																													<td>{inputReuniaoExtra.data.charAt(8) + inputReuniaoExtra.data.charAt(9) + "/" + inputReuniaoExtra.data.charAt(5) + inputReuniaoExtra.data.charAt(6)}</td>
-																													<td>{inputReuniaoExtra.dia}</td>
-																													<td>{inputReuniaoExtra.hora}</td>
-																													<td>{inputReuniaoExtra.local}</td>
-
-																												</tr>
-
-																											))}
-																										</tbody>
-																									</table>
-																								</td>
-																							</tr>
-																						</tbody>
-																					</table>
-																				))}
-																				<br />
-																			</td>
-																		</tr>
-																	</tbody>
-																</table>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											))}
-										</td>
-
-									</tr>
-								</tbody>
-							</table>
-						</Col>  */}
-
 					</Row>
 
 					<Row>
-						<Col>
-							<button class="btn-btn-success" onClick={printPDF}>Download</button>
+						<Col x="4">
+							<a onClick={goBack()} href="javascript:history.back()" class="btn btn-warning">Voltar</a>
+						</Col>
+						<Col x="4">
+							<button class="btn btn-success" onClick={printPDF}>Download</button>
+						</Col>
+						<Col x="4">
 						</Col>
 					</Row>
 

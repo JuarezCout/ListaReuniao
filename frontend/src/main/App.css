@@ -28,7 +28,7 @@
         var(--footer-height);
     
     grid-template-areas: 
-        "logo header"
+        "header header"
         "menu menu"
         "content content"
         "footer footer";
@@ -39,7 +39,7 @@
 }
 
 aside.logo {
-    grid-area: logo;
+    grid-area: header;
 }
 
 header.header {

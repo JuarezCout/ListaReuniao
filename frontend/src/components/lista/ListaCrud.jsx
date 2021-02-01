@@ -35,12 +35,21 @@ function ListaCrud() {
 
     const baseUrl = 'http://localhost:3001/listas'
     let idLista = 0
+    
+    useEffect(async () => {
+        await testAxios()
 
+    }, []);
 
     useEffect(() => {
-
         let values = { ...inputListas };
+        if (window.localStorage.getItem("voltar") !== null) {
+            console.log("Volteeeei")
+        }
         if (values[0].localidades.length != 0) {
+            window.localStorage.clear()
+            console.log("JSON", JSON.stringify(values[0])   )
+            window.localStorage.setItem("lista", JSON.stringify(values[0]))
             setInputDisabled(false)
             var obj = values[0]
             const method = inputId ? 'put' : 'post'
@@ -48,25 +57,25 @@ function ListaCrud() {
 
             axios[method](url, obj)
                 .catch(error => console.error('Error:', error))
-                .then(response => setInputId(response.data.id))
+                .then(response => setInputId(1))
         }
 
     }, [inputListas]);
 
-    useEffect(async () => {
-        await testAxios()
+    
 
-    }, []);
+    useEffect(() => {
+        if (JSON.parse(window.localStorage.getItem("lista")) !== null) {
+            setInputLista([JSON.parse(window.localStorage.getItem("lista"))])
+        }
+
+    }, [inputId]);
 
     function testAxios() {
         const url = 'http://localhost:3001/listas'
-
         axios(url)
             .catch(error => console.error('Error:', error))
-            .then(response =>
-                setInputListaExtras(response.data)
-            )
-
+            .then(response => setInputListaExtras(response.data[response.data.length-1]))
     }
 
     //Funções para uso de dados aleatorios
@@ -95,6 +104,17 @@ function ListaCrud() {
         } else {
             return "Ancião"
         }
+    }
+
+    function clearLclStrg() {
+        window.localStorage.clear()
+    }
+
+    function saveLclStorage(){
+        
+        let values = { ...inputListas };
+        console.log("Save", values[0])
+        window.localStorage.setItem("lista", JSON.stringify(values[0]))
     }
 
     //Funcao para alterar nome de reuniao
@@ -260,7 +280,6 @@ function ListaCrud() {
             /* if (negrito.checked) {
                 document.getElementById("obs_prev").style.fontWeight = "bolder"
             } */
-            console.log(text_obs)
             let values = { ...inputListas };
             let id = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].obs.length
             console.log(values[0].localidades[index_l].diversos[0].servicos_extras[index_se])
@@ -744,11 +763,11 @@ function ListaCrud() {
                 <Row>
                     <div className="col-md-4 text-center">
                         <Link to="/listas/pdf">
-                            <button class="btn btn-danger" id="btPdf" disabled={inputDisabled}>Gerar PDF</button>
+                            <button onClick={saveLclStorage()} class="btn btn-danger" id="btPdf" disabled={inputDisabled}>Gerar PDF</button>
                         </Link>
                     </div>
                     <div className="col-md-4 text-center">
-                        <a href="/" class="btn btn-warning">Voltar</a>
+                        <a href="javascript:history.back()" class="btn btn-warning" onClick={clearLclStrg()}>Voltar</a>
                     </div>
                     <div className="col-md-4 text-center">
                         <a href="/lista-pdf" class="btn btn-success">Salvar Lista</a>

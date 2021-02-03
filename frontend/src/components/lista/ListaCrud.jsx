@@ -45,6 +45,7 @@ function ListaCrud() {
         let values = { ...inputListas };
         if (values[0].localidades.length != 0) {
             window.localStorage.setItem("lista", JSON.stringify(values[0]))
+            setInputDisabled(true)
             setInputId(window.localStorage.getItem("id"))
             var obj = values[0]
             const method = inputId ? 'put' : 'post'

@@ -37,6 +37,8 @@ td, th {
 
 #obs {
   display:block;
+  margin-bottom: 8px;
+  margin-top: 8px;
 
   border: 2px solid black;
   font-size: 15px;
@@ -87,5 +89,5 @@ td, th {
     text-align: center;
     font-size: 15px;
     font-weight: bolder;
-
+    margin-bottom: 5px;
   }

@@ -43,26 +43,21 @@ function ListaCrud() {
 
     useEffect(() => {
         let values = { ...inputListas };
-        if (window.localStorage.getItem("voltar") !== null) {
-            console.log("Volteeeei")
-        }
         if (values[0].localidades.length != 0) {
-            window.localStorage.clear()
-            console.log("JSON", JSON.stringify(values[0])   )
             window.localStorage.setItem("lista", JSON.stringify(values[0]))
-            setInputDisabled(false)
+            setInputId(window.localStorage.getItem("id"))
             var obj = values[0]
             const method = inputId ? 'put' : 'post'
             const url = inputId ? `${baseUrl}/${inputId}` : baseUrl
+            console.log(url)
 
             axios[method](url, obj)
                 .catch(error => console.error('Error:', error))
-                .then(response => setInputId(1))
+                .then(response => changeId(response.data.id))
         }
 
     }, [inputListas]);
 
-    
 
     useEffect(() => {
         if (JSON.parse(window.localStorage.getItem("lista")) !== null) {
@@ -79,6 +74,17 @@ function ListaCrud() {
     }
 
     //Funções para uso de dados aleatorios
+
+    function changeId (id) {
+        if (inputId !== id) {
+            setInputId(id)            
+        }
+        window.localStorage.setItem("id", id)
+    }
+
+    function getIdLclStorage(){
+        setInputId(window.localStorage.getItem("id"))
+    }
 
     function setDate() {
         var n = new Date();
@@ -107,14 +113,14 @@ function ListaCrud() {
     }
 
     function clearLclStrg() {
-        window.localStorage.clear()
+       window.localStorage.clear()
     }
 
     function saveLclStorage(){
         
-        let values = { ...inputListas };
+      /*   let values = { ...inputListas };
         console.log("Save", values[0])
-        window.localStorage.setItem("lista", JSON.stringify(values[0]))
+        window.localStorage.setItem("lista", JSON.stringify(values[0])) */
     }
 
     //Funcao para alterar nome de reuniao
@@ -290,19 +296,19 @@ function ListaCrud() {
         }
     }
 
-    function handleRemoveObservacaoSE(index_l, index_o) {
+    function handleRemoveObservacaoSE(index_l, index_o, index_se) {
         let values = { ...inputListas }
-        values[0].localidades[index_l].diversos[0].obs.splice(index_o, 1)
+        values[0].localidades[index_l].diversos[0].servicos_extras[index_se].obs.splice(index_o, 1)
         setInputLista(values)
     }
 
-    function handleEditObservacaoSE(index_l, index_o) {
+    function handleEditObservacaoSE(index_l, index_o, index_se) {
         let values = { ...inputListas }
-        let data = values[0].localidades[index_l].diversos[0].obs[index_o].text_obs
+        let data = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].obs[index_o].text_obs
 
-        document.getElementById(indexaId("text_obs", index_l, 0)).value = data
+        document.getElementById(indexaId("text_obs", index_l, index_se)).value = data
 
-        values[0].localidades[index_l].diversos[0].obs.splice(index_o, 1)
+        values[0].localidades[index_l].diversos[0].servicos_extras[index_se].obs.splice(index_o, 1)
         setInputLista(values)
     }
 
@@ -700,7 +706,7 @@ function ListaCrud() {
                                     <div className="container">
                                         <br />
                                         <div className="row">
-                                            <div className="col-11" id="obs_prev">
+                                            <div className="col-11" id={indexaId("text_obs_se", index_l, index_se)}>
                                                 <p>{inputObservacao.text_obs}</p>
                                             </div>
                                             <div className="col-1">
@@ -763,7 +769,7 @@ function ListaCrud() {
                 <Row>
                     <div className="col-md-4 text-center">
                         <Link to="/listas/pdf">
-                            <button onClick={saveLclStorage()} class="btn btn-danger" id="btPdf" disabled={inputDisabled}>Gerar PDF</button>
+                            <button class="btn btn-danger" id="btPdf" disabled={inputDisabled}>Gerar PDF</button>
                         </Link>
                     </div>
                     <div className="col-md-4 text-center">

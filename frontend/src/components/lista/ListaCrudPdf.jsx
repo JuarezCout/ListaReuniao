@@ -26,7 +26,7 @@ function ListaCrudPdf() {
 		[]
 	);
 
-	let listas = [1, 2]
+	let listas = [1]
 
 	useEffect(async () => {
 		console.log("Eae")
@@ -83,18 +83,23 @@ function ListaCrudPdf() {
 	function printPDF() {
 
 		var style = "<style>";
-		style = style + "td, th {    text-align: left;    font-size: 14px;    word-wrap: break-word;    text-align: center;    padding: 0;  }"
-		style = style + "#localidade {    font-size: 30px;    border: 3px solid black;}"
-		style = style + "#servico {    font-size: 17px;    width: 400px;    border: 1px solid black;}"
-		style = style + "#diversos {    font-size: 23px;    border: 1px solid black;}"
-		style = style + "#reuniao {    border: 1px solid black;}"
-		style = style + "#obs {  white-space: pre-wrap;  word-wrap: break-word;  word-break: break-all;  white-space: normal;  display:block;  border: 1px solid black; font-size: 15px;}"
-		style = style + "header_css { width: 400px;, margin-left: 0px;  align-content: center;  align-items: center;  align-self: center;}"
-		style = style + "table {    padding: 5px;    width: 400px;    margin: 0;    border-collapse: collapse;  }"
-		style = style + "#head1 {  font-weight: bolder;    font-size: 18px;    text-decoration:underline ;    text-align: center;  }"
-		style = style + "#head2 {  text-align: center;    font-size: 12px;  }"
-		style = style + "#head3 {  text-align: center;    font-size: 15px;    font-weight: bolder;  }"
-		style = style + "#head4 {  text-align: center;    font-size: 15px;    font-weight: bolder;  }"
+		style = style + "body { font-family: Verdana, Geneva, Tahoma, sans-serif; display: grid; grid-template-rows: auto; grid-template-columns: 2fr 1fr; grid-template-areas: 'left right' ;}"
+		style = style + "#oDir { grid-area: right }"
+		style = style + "#oEsq { grid-area: left }"
+		style = style + "td, th {   border-collapse: collapse;   text-align: left;    font-size: 8px;     text-align: center;    padding: 0;  }"
+		style = style + "#localidade {  border-collapse: collapse;   font-size: 17px;    border: 2px solid black;}"
+		style = style + "#servico {  border-collapse: collapse;   font-size: 10px;    width: 340px;    border: 1px solid black;}"
+		style = style + "#diversos { border-collapse: collapse;    font-size: 13px;    border: 1px solid black;}"
+		style = style + "#reuniao {  border-collapse: collapse;   border: 1px solid black;}"
+		style = style + "#reuniao_anc {border-collapse: collapse;  border: 1px solid black; width: 130px;}"
+		style = style + "#obs { border-collapse: collapse;  margin-bottom: 8px; margin-top: 8px; white-space: pre-wrap;  white-space: normal;  display:block;  border: 1px solid black; font-size: 9px;}"
+		style = style + "#obs_se { border-collapse: collapse;  border-right: 1px solid black; border-left: 1px solid black; border-bottom: 1px solid black; font-size: 9px;}"
+		style = style + "#header_css { border-collapse: collapse;  width: 340px;, margin-left: 0px;  align-content: center;  align-items: center;  align-self: center;}"
+		style = style + "table {    width: 340px;    margin: 0;    border-collapse: collapse;  }"
+		style = style + "#head1 {  font-weight: bolder;    font-size: 13px;    text-decoration:underline ;    text-align: center;  }"
+		style = style + "#head2 {  text-align: center;    font-size: 6px;  }"
+		style = style + "#head3 {  text-align: center;    font-size: 10px;    font-weight: bolder;  }"
+		style = style + "#head4 {  text-align: center;    font-size: 10px;    font-weight: bolder; margin-bottom: 5px; }"
 		style = style + "</style>";
 
 		var divContents = document.getElementById("toPdf").outerHTML;
@@ -106,24 +111,28 @@ function ListaCrudPdf() {
 		printWindow.document.write(style)
 		//printWindow.document.getElementsByTagName("head")[0].appendChild(fileref);
 		printWindow.document.write('</head><body >');
+		printWindow.document.write('<div id="oEsq">');
 		printWindow.document.write(divContents);
+		printWindow.document.write('</div>');
+		printWindow.document.write('<div id="oDir">');
+		printWindow.document.write(divContents);
+		printWindow.document.write('</div>');
 		printWindow.document.write('</body></html>');
 		printWindow.document.close();
 		printWindow.print();
-		console.log(printWindow.innerWidthV)
 	}
 
 	//Função para renderização do conteudo
 	function renderForm() {
 
 		console.log("Listaass", inputListas)
-		if (inputListas.length > 2) {
+		if (inputListas.length >= 1) {
 			return (
 				<Container >
-					<Row id="toPdf">
+					<Row>
 						{listas.map((lista, id) => (
 
-							<Col xs='6' id="col_c">
+							<Col xs='6' id="toPdf">
 								<table>
 									<thead>
 										<tr>
@@ -165,11 +174,11 @@ function ListaCrudPdf() {
 																						<table>
 																							<thead>
 																								<tr>
-																									<th id='reuniao'>DATA</th>
-																									<th id='reuniao'>DIA</th>
-																									<th id='reuniao'>HORA</th>
-																									<th id='reuniao'>LOCAL</th>
-																									<th id='reuniao_anc'>{ifEnsaio(inputListas, index_l, index_s)}</th>
+																									<th id='reuniao' width="10%" >DATA</th>
+																									<th id='reuniao' width="10%" >DIA</th>
+																									<th id='reuniao' width="10%" >HORA</th>
+																									<th id='reuniao' width="40%" >LOCAL</th>
+																									<th id='reuniao_anc' width="30%" >{ifEnsaio(inputListas, index_l, index_s)}</th>
 																								</tr>
 																							</thead>
 
@@ -186,13 +195,12 @@ function ListaCrudPdf() {
 																								))}
 																							</tbody>
 																						</table>
-
+																						<br />
 																					</td>
 																				</tr>
 																			</tbody>
 																		</table>
 																	))}
-																	<br />
 																	<table>
 																		<thead>
 																			<tr>
@@ -203,18 +211,6 @@ function ListaCrudPdf() {
 																		<tbody>
 																			<tr>
 																				<td>
-																					{inputLocalidade.diversos[0].obs && inputLocalidade.diversos[0].obs.map((inputObs, index_o) => (
-																						<container>
-																							<br />
-																							<div id="obs">
-																								<a id={indexaId("obs", index_o, 0)}> {inputObs.text_obs} </a>
-																							</div>
-																							{/* <div>
-																								{ifNegrito(inputObs.negrito, indexaId("obs", index_o, 0))}
-																							</div> */}
-																						</container>
-																					))}
-																					<br />
 
 																					{inputLocalidade.diversos[0].servicos_extras && inputLocalidade.diversos[0].servicos_extras.map((inputServicoExtra, index_se) => (
 																						<container>
@@ -231,10 +227,10 @@ function ListaCrudPdf() {
 																											<table>
 																												<thead>
 																													<tr>
-																														<th id='reuniao'>DATA</th>
-																														<th id='reuniao'>DIA</th>
-																														<th id='reuniao'>HORA</th>
-																														<th id='reuniao'>LOCAL</th>
+																														<th id='reuniao' width="20%" >DATA</th>
+																														<th id='reuniao' width="20%" >DIA</th>
+																														<th id='reuniao' width="20%" >HORA</th>
+																														<th id='reuniao' width="40%" >LOCAL</th>
 																													</tr>
 																												</thead>
 
@@ -265,6 +261,17 @@ function ListaCrudPdf() {
 
 
 																					))}
+
+																					{inputLocalidade.diversos[0].obs && inputLocalidade.diversos[0].obs.map((inputObs, index_o) => (
+																						<container>
+																							<div id="obs">
+																								<a id={indexaId("obs", index_o, 0)}> {inputObs.text_obs} </a>
+																							</div>
+																							{/* <div>
+																{ifNegrito(inputObs.negrito, indexaId("obs", index_o, 0))}
+															</div> */}
+																						</container>
+																					))}
 																					<br />
 																				</td>
 																			</tr>
@@ -285,6 +292,168 @@ function ListaCrudPdf() {
 							</Col>
 
 						))}
+
+						<Col xs='6' >
+							<table>
+								<thead>
+									<tr>
+										<div id="header_css">
+											<div id="head1">CONGREGAÇÃO CRISTÃ NO BRASIL</div >
+											<div id="head2">Rua Pastor Samuel Munguba, 1000 - Fortaleza/CE- Fone: (85) 3223-8082</div >
+											<div id="head3">{inputListas[inputListas.length - 1].nome} - {inputListas[inputListas.length - 1].data} </div >
+											<div id="head4">Lista de Batismos, Santas Ceias e Diversos</div >
+										</div>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											{inputListas[inputListas.length - 1] && inputListas[inputListas.length - 1].localidades.map((inputLocalidade, index_l) => (
+												<table>
+													<thead>
+														<tr>
+															<th id='localidade'>
+																{inputLocalidade.nome}
+															</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>
+
+																{inputLocalidade.servicos && inputLocalidade.servicos.map((inputServico, index_s) => (
+																	<table>
+																		<thead>
+																			<tr>
+																				<th id='servico'>{inputServico.nome}</th>
+																			</tr>
+																		</thead>
+
+																		<tbody >
+																			<tr>
+																				<td>
+																					<table>
+																						<thead>
+																							<tr>
+																								<th id='reuniao' width="10%" >DATA</th>
+																								<th id='reuniao' width="10%" >DIA</th>
+																								<th id='reuniao' width="10%" >HORA</th>
+																								<th id='reuniao' width="40%" >LOCAL</th>
+																								<th id='reuniao_anc' width="30%" >{ifEnsaio(inputListas, index_l, index_s)}</th>
+																							</tr>
+																						</thead>
+
+																						<tbody>
+
+																							{inputServico.reunioes && inputServico.reunioes.map((inputReuniao, index_r) => (
+																								<tr>
+																									<td>{inputReuniao.data.charAt(8) + inputReuniao.data.charAt(9) + "/" + inputReuniao.data.charAt(5) + inputReuniao.data.charAt(6)}</td>
+																									<td>{inputReuniao.dia}</td>
+																									<td>{inputReuniao.hora}</td>
+																									<td>{inputReuniao.local}</td>
+																									<td>{inputReuniao.anciao}</td>
+																								</tr>
+																							))}
+																						</tbody>
+																					</table>
+
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																))}
+																<br />
+																<table>
+																	<thead>
+																		<tr>
+																			<th id='diversos'>DIVERSOS</th>
+																		</tr>
+																	</thead>
+
+																	<tbody>
+																		<tr>
+																			<td>
+
+																				{inputLocalidade.diversos[0].servicos_extras && inputLocalidade.diversos[0].servicos_extras.map((inputServicoExtra, index_se) => (
+																					<container>
+																						<table>
+																							<thead>
+																								<tr>
+																									<th id='servico'>{inputServicoExtra.nome}</th>
+																								</tr>
+																							</thead>
+
+																							<tbody>
+																								<tr>
+																									<td>
+																										<table>
+																											<thead>
+																												<tr>
+																													<th id='reuniao' width="20%" >DATA</th>
+																													<th id='reuniao' width="20%" >DIA</th>
+																													<th id='reuniao' width="20%" >HORA</th>
+																													<th id='reuniao' width="40%" >LOCAL</th>
+																												</tr>
+																											</thead>
+
+																											<tbody>
+																												{inputServicoExtra.reunioes_extras && inputServicoExtra.reunioes_extras.map((inputReuniaoExtra, index_re) => (
+																													<tr>
+																														<td id='reuniao'>{inputReuniaoExtra.data.charAt(8) + inputReuniaoExtra.data.charAt(9) + "/" + inputReuniaoExtra.data.charAt(5) + inputReuniaoExtra.data.charAt(6)}</td>
+																														<td id='reuniao'>{inputReuniaoExtra.dia}</td>
+																														<td id='reuniao'>{inputReuniaoExtra.hora}</td>
+																														<td id='reuniao'>{inputReuniaoExtra.local}</td>
+																													</tr>
+																												))}
+																											</tbody>
+																										</table>
+																									</td>
+																								</tr>
+																							</tbody>
+																						</table>
+
+																						<div id="obs_se">
+																							{inputServicoExtra.obs && inputServicoExtra.obs.map((inputObs, index_o) => (
+																								<div>
+																									{inputObs.text_obs}
+																								</div>
+																							))}
+																						</div>
+																					</container>
+
+
+																				))}
+
+																				{inputLocalidade.diversos[0].obs && inputLocalidade.diversos[0].obs.map((inputObs, index_o) => (
+																					<container>
+																						<div id="obs">
+																							<a id={indexaId("obs", index_o, 0)}> {inputObs.text_obs} </a>
+																						</div>
+																						{/* <div>
+																{ifNegrito(inputObs.negrito, indexaId("obs", index_o, 0))}
+															</div> */}
+																					</container>
+																				))}
+																				<br />
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+
+											))}
+										</td>
+
+									</tr>
+								</tbody>
+							</table>
+
+						</Col>
+
+
 					</Row>
 
 					<Row>

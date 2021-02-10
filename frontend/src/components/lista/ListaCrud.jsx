@@ -34,8 +34,16 @@ function ListaCrud() {
     const [inputDisabled, setInputDisabled] = useState(true)
 
     const baseUrl = 'http://localhost:3001/listas'
-    let idLista = 0
-    
+
+    const [inputChgLista, setInputChgLista] = useState(0)
+
+    useEffect(() => {
+        console.log(window.localStorage.getItem("lista"))
+        if (JSON.parse(window.localStorage.getItem("lista")) !== null) {
+            setInputLista([JSON.parse(window.localStorage.getItem("lista"))])
+        }
+    }, [inputChgLista])
+
     useEffect(async () => {
         await testAxios()
 
@@ -43,10 +51,15 @@ function ListaCrud() {
 
     useEffect(() => {
         let values = { ...inputListas };
+        console.log(inputListas)
+
+
         if (values[0].localidades.length != 0) {
             window.localStorage.setItem("lista", JSON.stringify(values[0]))
-            setInputDisabled(true)
-            setInputId(window.localStorage.getItem("id"))
+            setInputDisabled(false)
+            if (window.localStorage.getItem("id") !== null && window.localStorage.getItem("id") !== undefined) {
+                setInputId(70)
+            }
             var obj = values[0]
             const method = inputId ? 'put' : 'post'
             const url = inputId ? `${baseUrl}/${inputId}` : baseUrl
@@ -55,15 +68,17 @@ function ListaCrud() {
             axios[method](url, obj)
                 .catch(error => console.error('Error:', error))
                 .then(response => changeId(response.data.id))
+        } else {
+            setInputChgLista(1)
         }
 
     }, [inputListas]);
 
 
     useEffect(() => {
-        if (JSON.parse(window.localStorage.getItem("lista")) !== null) {
+        /* if (JSON.parse(window.localStorage.getItem("lista")) !== null) {
             setInputLista([JSON.parse(window.localStorage.getItem("lista"))])
-        }
+        } */
 
     }, [inputId]);
 
@@ -71,19 +86,19 @@ function ListaCrud() {
         const url = 'http://localhost:3001/listas'
         axios(url)
             .catch(error => console.error('Error:', error))
-            .then(response => setInputListaExtras(response.data[response.data.length-1]))
+            .then(response => setInputListaExtras(response.data[response.data.length - 1]))
     }
 
     //Funções para uso de dados aleatorios
 
-    function changeId (id) {
+    function changeId(id) {
         if (inputId !== id) {
-            setInputId(id)            
+            setInputId(id)
+            window.localStorage.setItem("id", id)
         }
-        window.localStorage.setItem("id", id)
     }
 
-    function getIdLclStorage(){
+    function getIdLclStorage() {
         setInputId(window.localStorage.getItem("id"))
     }
 
@@ -114,14 +129,15 @@ function ListaCrud() {
     }
 
     function clearLclStrg() {
-       window.localStorage.clear()
+        window.localStorage.clear()
+        window.history.back()
     }
 
-    function saveLclStorage(){
-        
-      /*   let values = { ...inputListas };
-        console.log("Save", values[0])
-        window.localStorage.setItem("lista", JSON.stringify(values[0])) */
+    function saveLclStorage() {
+
+        /*   let values = { ...inputListas };
+          console.log("Save", values[0])
+          window.localStorage.setItem("lista", JSON.stringify(values[0])) */
     }
 
     //Funcao para alterar nome de reuniao
@@ -267,13 +283,16 @@ function ListaCrud() {
 
     function handleEditReuniaoExtra(index_l, index_se, index_re) {
         let values = { ...inputListas }
-        let data = values[0].localidades[index_l].servicos[index_se].reunioes[index_re].data
+        console.log(values)
+        console.log(index_se)
+        console.log(index_re)
+        let data = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras[index_re].data
 
 
         document.getElementById(indexaId("data_reuniao_e", index_l, index_se)).value = data
-        document.getElementById(indexaId("dia_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].servicos[index_se].reunioes[index_re].dia
-        document.getElementById(indexaId("hora_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].servicos[index_se].reunioes[index_re].hora
-        document.getElementById(indexaId("local_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].servicos[index_se].reunioes[index_re].local
+        document.getElementById(indexaId("dia_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras[index_re].dia
+        document.getElementById(indexaId("hora_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras[index_re].hora
+        document.getElementById(indexaId("local_reuniao_e", index_l, index_se)).value = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras[index_re].local
 
         values[0].localidades[index_l].diversos[0].servicos_extras[index_se].reunioes_extras.splice(index_re, 1)
         setInputLista(values)
@@ -307,7 +326,7 @@ function ListaCrud() {
         let values = { ...inputListas }
         let data = values[0].localidades[index_l].diversos[0].servicos_extras[index_se].obs[index_o].text_obs
 
-        document.getElementById(indexaId("text_obs", index_l, index_se)).value = data
+        document.getElementById(indexaId("text_obs_se", index_l, index_se)).value = data
 
         values[0].localidades[index_l].diversos[0].servicos_extras[index_se].obs.splice(index_o, 1)
         setInputLista(values)
@@ -398,7 +417,9 @@ function ListaCrud() {
                     <Col xs="8" className="form-group">
                         <h2 htmlFor="nome">Nome da Reunião</h2>
                         <select className="form-control" id="nome">
-                            <option value="Reunião Geral do Ministério">Reunião Geral do Ministério</option>
+                            <option value="Reunião Geral de Ensinamentos">Reunião Geral de Ensinamentos</option>
+                            <option value="Reunião Regional do Ministério">Reunião Regional do Ministério</option>
+                            <option value="Reunião Geral do Ministério Regional">Reunião Geral do Ministério Regional</option>
                         </select>
                     </Col>
                     <Col xs="4" className="form-group">
@@ -732,8 +753,8 @@ function ListaCrud() {
                         </div>
 
                         <div className="row">
-                            <div className="col-8">
-                                <input type="text" className="form-control" id={indexaId("text_obs", index_l, 0)} />
+                            <div className="col-8">                                
+                                <textarea className="form-control" rows="5" id={indexaId("text_obs", index_l, 0)} />
                             </div>
                             <div className="col-1">
                                 <label for="negrito">  Negrito</label>
@@ -774,7 +795,7 @@ function ListaCrud() {
                         </Link>
                     </div>
                     <div className="col-md-4 text-center">
-                        <a href="javascript:history.back()" class="btn btn-warning" onClick={clearLclStrg()}>Voltar</a>
+                        <button type="button" class="btn btn-warning" onClick={clearLclStrg}>Voltar</button>
                     </div>
                     <div className="col-md-4 text-center">
                         <a href="/lista-pdf" class="btn btn-success">Salvar Lista</a>

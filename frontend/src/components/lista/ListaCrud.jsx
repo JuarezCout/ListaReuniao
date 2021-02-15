@@ -75,12 +75,6 @@ function ListaCrud() {
     }, [inputListas]);
 
 
-    useEffect(() => {
-        /* if (JSON.parse(window.localStorage.getItem("lista")) !== null) {
-            setInputLista([JSON.parse(window.localStorage.getItem("lista"))])
-        } */
-
-    }, [inputId]);
 
     function testAxios() {
         const url = 'http://localhost:3001/listas'

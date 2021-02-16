@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "listareuniaofrontend14740dda": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

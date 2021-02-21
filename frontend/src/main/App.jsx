@@ -12,7 +12,7 @@ import Footer from '../components/templates/Footer'
 export default props =>
     <HashRouter>
         <div className="app">
-            <Logo/>
+             <Logo/>
             <Navi/>
             <Routes/>
             <Footer/>

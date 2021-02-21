@@ -10,22 +10,8 @@ import Navi from '../components/templates/Navi'
 import Footer from '../components/templates/Footer'
 
 import logo from './../assets/imgs/logo-ccb-light.png';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 
-function App() {
-  return (
-    <div className="App">
-      <header>
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>We now have Auth!</h1>
-      </header>
-      <AmplifySignOut />
-    </div>
-  );
-}
 
-export default withAuthenticator(App);
-/* 
 export default props =>
     <HashRouter>
         <div className="app">
@@ -34,5 +20,5 @@ export default props =>
             <Routes/>
             <Footer/>
         </div>
-    </HashRouter> */
+    </HashRouter> 
     

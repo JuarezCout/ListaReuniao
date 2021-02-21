@@ -4,8 +4,6 @@ import './index.css'
 import App from './main/App'
 import registerServiceWorker from './registerServiceWorker'
 
-Amplify.configure(config);
-
 console.log('App', App)
 
 ReactDOM.render(<App    />, document.getElementById('root'))

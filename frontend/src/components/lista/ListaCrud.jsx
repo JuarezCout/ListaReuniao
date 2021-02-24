@@ -65,9 +65,9 @@ function ListaCrud() {
             const url = inputId ? `${baseUrl}/${inputId}` : baseUrl
             console.log(url)
 
-            axios[method](url, obj)
+            /* axios[method](url, obj)
                 .catch(error => console.error('Error:', error))
-                .then(response => changeId(response.data.id))
+                .then(response => changeId(response.data.id)) */
         } else {
             setInputChgLista(1)
         }
@@ -78,9 +78,9 @@ function ListaCrud() {
 
     function testAxios() {
         const url = 'http://localhost:3001/listas'
-        axios(url)
+        /* axios(url)
             .catch(error => console.error('Error:', error))
-            .then(response => setInputListaExtras(response.data[response.data.length - 1]))
+            .then(response => setInputListaExtras(response.data[response.data.length - 1])) */
     }
 
     //Funções para uso de dados aleatorios

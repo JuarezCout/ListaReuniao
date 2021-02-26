@@ -53,8 +53,8 @@ const ListaSchema = new mongoose.Schema({
         }]
     }],
   id: Number
-});
+},{collection: 'lista_reuniao'});
 
 
-const Lista = mongoose.model('Lista', ListaSchema); //convert to model named Tea
+const Lista = mongoose.model("Lista", ListaSchema, "db"); //convert to model named Lista
 module.exports = Lista; //export for controller use

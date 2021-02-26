@@ -1,7 +1,7 @@
 const Lista = require("../itens/lista")
 
 //GET '/lista'
-exports.getAllLista = (req, res) => {
+exports.getAllLista = (req, res, next) => {
     Lista.find({}, (err, lista) => {
         if (err) {
             res.status(500).send(err);
@@ -10,36 +10,465 @@ exports.getAllLista = (req, res) => {
     });
 };
 
+//GET '/lista/:name'
+exports.getOneLista = (req, res, next) => {
+    let id = req.params.id; //get the lista name
+
+    //find the specific lista with that name
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else return res.json({ message: "Lista " + id + " encontrada" }); //return the tea object if found
+    });
+};
+
 //POST '/lista'
-const newLista = (req, res, next) => {
+exports.newLista = (req, res, next) => {
+    Lista.findOneAndReplace
     res.json({ message: "POST new lista" });
 };
 
-//DELETE '/lista'
-const deleteAllLista = (req, res, next) => {
-    res.json({ message: "DELETE all lista" });
+//POST '/lista/:id'
+exports.newLocalidade = (req, res, next) => {
+    let id = req.params.id;
+    let localidade = req.body.localidade;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !newComment) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades.push(localidade);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
 };
 
-//GET '/lista/:name'
-const getOneLista = (req, res, next) => {
-    res.json({ message: "GET 1 lista" });
+//POST '/lista/:id'
+exports.newServico = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let servico = req.body.servico;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !servico) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].servicos.push(servico);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
 };
 
-//POST '/lista/:name'
-const newComment = (req, res, next) => {
-    res.json({ message: "POST 1 lista comment" });
+//POST '/lista/:id'
+exports.newReuniao = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let reuniao = req.body.reuniao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !reuniao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].servicos[index_s].reunioes.push(reuniao);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//POST '/lista/:id'
+exports.newServicoExtra = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let servico = req.body.servico;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !servico) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].servicos_extras.push(servico);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//POST '/lista/:id'
+exports.newReuniaoExtra = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let reuniao = req.body.reuniao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !reuniao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].servicos_extras[index_s].reunioes_extras.push(servico);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//POST '/lista/:id'
+exports.newObservacao = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let observacao = req.body.observacao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !observacao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].obs.push(observacao);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//POST '/lista/:id'
+exports.newobservacaoExtra = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let obs = req.body.obs;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !obs) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].servicos_extras[index_s].obs.push(servico);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//PUT '/lista/:id'
+exports.updateReuniao = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let index_r = req.params.index_r;
+    let reuniao = req.body.reuniao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !reuniao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].servicos[index_s].reunioes.slice(index_r, 1, reuniao);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Comment failed to add.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//PUT '/lista/:id'
+exports.updateReuniaoExtra = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let index_r = req.params.index_r;
+    let reuniao = req.body.reuniao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !reuniao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].servicos_extras[index_s].reunioes_extras.slice(index_r, 1, reuniao);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Comment failed to add.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//PUT '/lista/:id'
+exports.updateObservacao = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_o = req.params.index_o;
+    let observacao = req.body.observacao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !observacao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].obs.slice(index_o, 1, observacao);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Comment failed to add.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//PUT '/lista/:id'
+exports.updateObservacaoExtra = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let index_o = req.params.index_o;
+    let obs = req.body.obs;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !obs) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].servicos_extras[index_s].obs.slice(index_o, 1, obs);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Comment failed to add.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
 };
 
 //DELETE '/lista/:name'
-const deleteOneLista = (req, res, next) => {
-    res.json({ message: "DELETE 1 lista" });
+exports.deleteOneLista = (req, res, next) => {
+    let id = req.params.id;
+
+    Lista.deleteOne({ id: id }, (err, data) => {
+        if (err || !data) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else return res.json({ message: "Lista " + id + " excluída" });
+    });
 };
 
-//export controller functions
-module.exports = {
-    newLista,
-    deleteAllLista,
-    getOneLista,
-    newComment,
-    deleteOneLista
+//DELETE '/lista/:id'
+exports.deleteLocalidade = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let localidade = req.body.localidade;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !newComment) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades.slice(index_l, 1);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//DELETE '/lista/:id'
+exports.deleteServico = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let servico = req.body.servico;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !servico) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].servicos.slice(index_s, 1);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//DELETE '/lista/:id'
+exports.deleteReuniao = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let index_r = req.params.index_r;
+    let reuniao = req.body.reuniao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !reuniao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].servicos[index_s].reunioes.slice(index_r, 1);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//DELETE '/lista/:id'
+exports.deleteServicoExtra = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let servico = req.body.servico;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !servico) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].servicos_extras.slice(index_s, 1);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//DELETE '/lista/:id'
+exports.deleteReuniaoExtra = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let index_r = req.params.index_r;
+    let reuniao = req.body.reuniao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !reuniao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].servicos_extras[index_s].reunioes_extras.slice(index_r, 1);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//DELETE '/lista/:id'
+exports.deleteObservacao = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_o = req.params.index_o;
+    let observacao = req.body.observacao;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !observacao) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].obs.slice(index_o, 1);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
+};
+
+//DELETE '/lista/:id'
+exports.deleteObservacaoExtra = (req, res, next) => {
+    let id = req.params.id;
+    let index_l = req.params.index_l;
+    let index_s = req.params.index_s;
+    let index_o = req.params.index_o;
+    let obs = req.body.obs;
+
+    Lista.findOne({ id: id }, (err, data) => {
+        if (err || !data || !obs) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else {
+            data.localidades[index_l].diversos[0].servicos_extras[index_s].obs.slice(index_o, 1);
+
+            data.save(err => {
+                if (err) {
+                    return res.json({ message: "Erro ao adicionar dado.", error: err });
+                }
+                return res.json(data);
+            })
+        }
+    })
 };

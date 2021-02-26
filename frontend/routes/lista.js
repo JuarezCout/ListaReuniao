@@ -15,14 +15,46 @@ module.exports = router; */
 
 module.exports = function (app) {
     app
-        .route('/lista')
-        .get(listaController.getAllLista)
-        .post(listaController.newLista)
-        .delete(listaController.deleteAllLista);
+        .get('/listas', listaController.getAllLista)
+        .post('/listas', listaController.newLista)
 
     app
-        .route('/lista/:id')
-        .get(listaController.getOneLista)
-        .post(listaController.newComment)
-        .delete(listaController.deleteOneLista);
+        .get('/listas/:id', listaController.getOneLista)
+        .post('/listas/:id', listaController.newComment)
+        .delete('/listas/:id', listaController.deleteOneLista);
+
+    app
+        .post('/listas/:id', listaController.newLocalidade)
+        .delete('/listas/:id', listaController.deleteLocalidade);
+
+    app
+        .post('/listas/:id', listaController.newServico)
+        .delete('/listas/:id', listaController.deleteServico);
+
+    app
+        .post('/listas/:id', listaController.newReuniao)
+        .put('/listas/:id', listaController.updateReuniao)
+        .delete('/listas/:id', listaController.deleteReuniao);
+
+
+    app
+        .post('/listas/:id', listaController.newServicoExtra)
+        .delete('/listas/:id', listaController.deleteServicoExtra);
+
+
+    app
+        .post('/listas/:id', listaController.newReuniaoExtra)
+        .put('/listas/:id', listaController.updateReuniaoExtra)
+        .delete('/listas/:id', listaController.deleteReuniaoExtra);
+
+    app
+        .post('/listas/:id', listaController.newLista)
+        .put('/listas/:id', listaController.newLista)
+        .delete('/listas/:id', listaController.deleteAllLista);
+
+    app
+        .post('/listas/:id', listaController.newLista)
+        .put('/listas/:id', listaController.newLista)
+        .delete('/listas/:id', listaController.deleteAllLista);
+
 } 

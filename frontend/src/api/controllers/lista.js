@@ -25,7 +25,6 @@ exports.getOneLista = (req, res, next) => {
 
 //POST '/lista'
 exports.newLista = (req, res, next) => {
-    Lista.findOneAndReplace
     res.json({ message: "POST new lista" });
 };
 

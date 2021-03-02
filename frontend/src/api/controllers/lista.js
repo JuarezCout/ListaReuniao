@@ -35,7 +35,7 @@ exports.newLocalidade = (req, res, next) => {
     let localidade = req.body.localidade;
 
     Lista.findOne({ id: id }, (err, data) => {
-        if (err || !data || !newComment) {
+        if (err || !data || !localidade) {
             return res.json({ message: "Lista não existe." });
         }
         else {
@@ -133,7 +133,7 @@ exports.newReuniaoExtra = (req, res, next) => {
             return res.json({ message: "Lista não existe." });
         }
         else {
-            data.localidades[index_l].diversos[0].servicos_extras[index_s].reunioes_extras.push(servico);
+            data.localidades[index_l].diversos[0].servicos_extras[index_s].reunioes_extras.push(reuniao);
 
             data.save(err => {
                 if (err) {
@@ -180,7 +180,7 @@ exports.newobservacaoExtra = (req, res, next) => {
             return res.json({ message: "Lista não existe." });
         }
         else {
-            data.localidades[index_l].diversos[0].servicos_extras[index_s].obs.push(servico);
+            data.localidades[index_l].diversos[0].servicos_extras[index_s].obs.push(obs);
 
             data.save(err => {
                 if (err) {
@@ -310,7 +310,7 @@ exports.deleteLocalidade = (req, res, next) => {
     let localidade = req.body.localidade;
 
     Lista.findOne({ id: id }, (err, data) => {
-        if (err || !data || !newComment) {
+        if (err || !data || !localidade) {
             return res.json({ message: "Lista não existe." });
         }
         else {

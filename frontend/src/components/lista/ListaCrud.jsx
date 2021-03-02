@@ -9,7 +9,7 @@ import { Container, Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup';
 
-require('../../../config/server')
+require('../../api/config/server')
 
 
 let headerProps = {

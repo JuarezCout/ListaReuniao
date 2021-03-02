@@ -10,7 +10,7 @@ exports.getAllLista = (req, res, next) => {
     });
 };
 
-//GET '/lista/:name'
+//GET '/lista/:id'
 exports.getOneLista = (req, res, next) => {
     let id = req.params.id; //get the lista name
 
@@ -19,7 +19,7 @@ exports.getOneLista = (req, res, next) => {
         if (err || !data) {
             return res.json({ message: "Lista não existe." });
         }
-        else return res.json({ message: "Lista " + id + " encontrada" }); //return the tea object if found
+        else return res.json({ data }); //return the tea object if found
     });
 };
 
@@ -29,7 +29,7 @@ exports.newLista = (req, res, next) => {
     res.json({ message: "POST new lista" });
 };
 
-//POST '/lista/:id'
+//POST '/localidade/'
 exports.newLocalidade = (req, res, next) => {
     let id = req.params.id;
     let localidade = req.body.localidade;
@@ -51,7 +51,7 @@ exports.newLocalidade = (req, res, next) => {
     })
 };
 
-//POST '/lista/:id'
+//POST '/servico/'
 exports.newServico = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -74,7 +74,7 @@ exports.newServico = (req, res, next) => {
     })
 };
 
-//POST '/lista/:id'
+//POST '/reuniao'
 exports.newReuniao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -98,7 +98,7 @@ exports.newReuniao = (req, res, next) => {
     })
 };
 
-//POST '/lista/:id'
+//POST '/servicoextra'
 exports.newServicoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -121,7 +121,7 @@ exports.newServicoExtra = (req, res, next) => {
     })
 };
 
-//POST '/lista/:id'
+//POST '/reuniaoextra'
 exports.newReuniaoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -145,7 +145,7 @@ exports.newReuniaoExtra = (req, res, next) => {
     })
 };
 
-//POST '/lista/:id'
+//POST '/observacao
 exports.newObservacao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -168,7 +168,7 @@ exports.newObservacao = (req, res, next) => {
     })
 };
 
-//POST '/lista/:id'
+//POST '/observacaoextra'
 exports.newobservacaoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -192,7 +192,7 @@ exports.newobservacaoExtra = (req, res, next) => {
     })
 };
 
-//PUT '/lista/:id'
+//PUT '/reuniao/:id'
 exports.updateReuniao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -217,7 +217,7 @@ exports.updateReuniao = (req, res, next) => {
     })
 };
 
-//PUT '/lista/:id'
+//PUT '/reuniaoextra/:id'
 exports.updateReuniaoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -242,7 +242,7 @@ exports.updateReuniaoExtra = (req, res, next) => {
     })
 };
 
-//PUT '/lista/:id'
+//PUT '/observacao/:id'
 exports.updateObservacao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -266,7 +266,7 @@ exports.updateObservacao = (req, res, next) => {
     })
 };
 
-//PUT '/lista/:id'
+//PUT '/observacaoextra/:id'
 exports.updateObservacaoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -291,7 +291,7 @@ exports.updateObservacaoExtra = (req, res, next) => {
     })
 };
 
-//DELETE '/lista/:name'
+//DELETE '/lista/:id'
 exports.deleteOneLista = (req, res, next) => {
     let id = req.params.id;
 
@@ -303,7 +303,7 @@ exports.deleteOneLista = (req, res, next) => {
     });
 };
 
-//DELETE '/lista/:id'
+//DELETE '/localidade/:id'
 exports.deleteLocalidade = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -326,7 +326,7 @@ exports.deleteLocalidade = (req, res, next) => {
     })
 };
 
-//DELETE '/lista/:id'
+//DELETE '/servico/:id'
 exports.deleteServico = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -350,7 +350,7 @@ exports.deleteServico = (req, res, next) => {
     })
 };
 
-//DELETE '/lista/:id'
+//DELETE '/reuniao/:id'
 exports.deleteReuniao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -375,7 +375,7 @@ exports.deleteReuniao = (req, res, next) => {
     })
 };
 
-//DELETE '/lista/:id'
+//DELETE '/servicoextra/:id'
 exports.deleteServicoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -399,7 +399,7 @@ exports.deleteServicoExtra = (req, res, next) => {
     })
 };
 
-//DELETE '/lista/:id'
+//DELETE '/reuniaoextra/:id'
 exports.deleteReuniaoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -424,7 +424,7 @@ exports.deleteReuniaoExtra = (req, res, next) => {
     })
 };
 
-//DELETE '/lista/:id'
+//DELETE '/observacao/:id'
 exports.deleteObservacao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
@@ -448,7 +448,7 @@ exports.deleteObservacao = (req, res, next) => {
     })
 };
 
-//DELETE '/lista/:id'
+//DELETE '/observacaoextra/:id'
 exports.deleteObservacaoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;

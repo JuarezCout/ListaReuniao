@@ -9,6 +9,9 @@ import { Container, Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup';
 
+require('../../../config/server')
+
+
 let headerProps = {
     icon: 'listas',
     title: 'Criação de Lista',
@@ -201,9 +204,6 @@ function ListaCrud() {
             alert("Preencher campo Observacao")
 
         } else {
-            /* if (negrito.checked) {
-                document.getElementById("obs_prev").style.fontWeight = "bolder"
-            } */
             let values = { ...inputListas };
             let id = values[0].localidades[index_l].diversos[0].obs.length
             values[0].localidades[index_l].diversos[0].obs.push({ id: id, text_obs: text_obs, negrito: negrito.checked })

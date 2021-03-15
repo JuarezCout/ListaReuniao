@@ -32,11 +32,12 @@ function ListaCrudPdf() {
 
 	let listas = [1, 2]
 
-	useEffect(async () => {
+	 useEffect(async () => {
 		console.log("Eae")
 		await testAxios()
+		
 
-	}, []);
+	}, []); 
 
 	useEffect(() => {
        /*  if (document.getElementById("obs00") !== null) {
@@ -61,6 +62,12 @@ function ListaCrudPdf() {
 
 			
 		} */
+
+		if (window.localStorage.getItem("lista") !== null) {
+			setInputLista(JSON.parse(window.localStorage.getItem("lista")))
+		}
+
+		console.log(inputListas)
 
 		
     }, []);
@@ -109,12 +116,13 @@ function ListaCrudPdf() {
 
 	function testAxios() {
 		const url = 'http://localhost:3001/listas'
-
+/* 
 		axios(url)
 			.catch(error => console.error('Error:', error))
 			.then(response =>
-				setInputLista(response.data)
-			)
+				//setInputLista(response.data)
+				console.log("eae")
+			) */
 
 	}
 
@@ -168,7 +176,9 @@ function ListaCrudPdf() {
 	function renderForm() {
 
 		console.log("Listaass", inputListas)
-		if (inputListas.length >= 1) {
+		if (inputListas.length !== 0) {
+			console.log(inputListas)
+
 			return (
 				<Container >
 					<Row>
@@ -181,7 +191,7 @@ function ListaCrudPdf() {
 											<div id="header_css">
 												<div id="head1">CONGREGAÇÃO CRISTÃ NO BRASIL</div >
 												<div id="head2">Rua Pastor Samuel Munguba, 1000 - Fortaleza/CE- Fone: (85) 3223-8082</div >
-												<div id="head3">{inputListas[inputListas.length - 1].nome} - {inputListas[inputListas.length - 1].data} </div >
+												<div id="head3">{inputListas.nome} - {inputListas.data} </div >
 												<div id="head4">Lista de Batismos, Santas Ceias e Diversos</div >
 											</div>
 										</tr>
@@ -189,7 +199,7 @@ function ListaCrudPdf() {
 									<tbody>
 										<tr>
 											<td>
-												{inputListas[inputListas.length - 1] && inputListas[inputListas.length - 1].localidades.map((inputLocalidade, index_l) => (
+												{inputListas && inputListas.localidades.map((inputLocalidade, index_l) => (
 													<table>
 														<thead>
 															<tr>

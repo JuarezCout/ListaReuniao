@@ -1,5 +1,8 @@
 const Lista = require("../itens/lista")
 
+
+//Funcoes para a Lista completa
+
 //GET '/lista'
 exports.getAllLista = (req, res, next) => {
     Lista.find({}, (err, lista) => {
@@ -19,19 +22,52 @@ exports.getOneLista = (req, res, next) => {
         if (err || !data) {
             return res.json({ message: "Lista não existe." });
         }
-        else return res.json({ data }); //return the tea object if found
+        else return res.json({ data }); //return the lista object if found
     });
 };
 
+
 //POST '/lista'
 exports.newLista = (req, res, next) => {
-    res.json({ message: "POST new lista" });
+
+    Lista.findOne({id:req.params.id},(data)=>{
+
+        if(data===null){
+            const newLista = new Lista({
+                nome:req.params.nome,
+                data: req.params.data,
+                localidades: req.params.localidades,
+            })
+
+            newLista.save((err, data)=>{
+                if(err) return res.json({Error: err});
+                return res.json(data);
+            })           
+        }else{
+            return res.json({message:"Lista already exists"});
+        }
+    })    
 };
+
+
+//DELETE '/lista/:id'
+exports.deleteOneLista = (req, res, next) => {
+    let id = req.params.id;
+
+    Lista.deleteOne({ id: id }, (err, data) => {
+        if (err || !data) {
+            return res.json({ message: "Lista não existe." });
+        }
+        else return res.json({ message: "Lista " + id + " excluída" });
+    });
+};
+
+
 
 //POST '/localidade/'
 exports.newLocalidade = (req, res, next) => {
     let id = req.params.id;
-    let localidade = req.body.localidade;
+    let localidade = req.params.localidade;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !localidade) {
@@ -54,7 +90,7 @@ exports.newLocalidade = (req, res, next) => {
 exports.newServico = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
-    let servico = req.body.servico;
+    let servico = req.params.servico;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !servico) {
@@ -78,7 +114,7 @@ exports.newReuniao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
-    let reuniao = req.body.reuniao;
+    let reuniao = req.params.reuniao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !reuniao) {
@@ -101,7 +137,7 @@ exports.newReuniao = (req, res, next) => {
 exports.newServicoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
-    let servico = req.body.servico;
+    let servico = req.params.servico;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !servico) {
@@ -125,7 +161,7 @@ exports.newReuniaoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
-    let reuniao = req.body.reuniao;
+    let reuniao = req.params.reuniao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !reuniao) {
@@ -148,7 +184,7 @@ exports.newReuniaoExtra = (req, res, next) => {
 exports.newObservacao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
-    let observacao = req.body.observacao;
+    let observacao = req.params.observacao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !observacao) {
@@ -172,7 +208,7 @@ exports.newobservacaoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
-    let obs = req.body.obs;
+    let obs = req.params.obs;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !obs) {
@@ -197,7 +233,7 @@ exports.updateReuniao = (req, res, next) => {
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
     let index_r = req.params.index_r;
-    let reuniao = req.body.reuniao;
+    let reuniao = req.params.reuniao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !reuniao) {
@@ -222,7 +258,7 @@ exports.updateReuniaoExtra = (req, res, next) => {
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
     let index_r = req.params.index_r;
-    let reuniao = req.body.reuniao;
+    let reuniao = req.params.reuniao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !reuniao) {
@@ -246,7 +282,7 @@ exports.updateObservacao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
     let index_o = req.params.index_o;
-    let observacao = req.body.observacao;
+    let observacao = req.params.observacao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !observacao) {
@@ -271,7 +307,7 @@ exports.updateObservacaoExtra = (req, res, next) => {
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
     let index_o = req.params.index_o;
-    let obs = req.body.obs;
+    let obs = req.params.obs;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !obs) {
@@ -290,23 +326,13 @@ exports.updateObservacaoExtra = (req, res, next) => {
     })
 };
 
-//DELETE '/lista/:id'
-exports.deleteOneLista = (req, res, next) => {
-    let id = req.params.id;
 
-    Lista.deleteOne({ id: id }, (err, data) => {
-        if (err || !data) {
-            return res.json({ message: "Lista não existe." });
-        }
-        else return res.json({ message: "Lista " + id + " excluída" });
-    });
-};
 
 //DELETE '/localidade/:id'
 exports.deleteLocalidade = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
-    let localidade = req.body.localidade;
+    let localidade = req.params.localidade;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !localidade) {
@@ -330,7 +356,7 @@ exports.deleteServico = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
-    let servico = req.body.servico;
+    let servico = req.params.servico;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !servico) {
@@ -355,7 +381,7 @@ exports.deleteReuniao = (req, res, next) => {
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
     let index_r = req.params.index_r;
-    let reuniao = req.body.reuniao;
+    let reuniao = req.params.reuniao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !reuniao) {
@@ -379,7 +405,7 @@ exports.deleteServicoExtra = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
-    let servico = req.body.servico;
+    let servico = req.params.servico;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !servico) {
@@ -404,7 +430,7 @@ exports.deleteReuniaoExtra = (req, res, next) => {
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
     let index_r = req.params.index_r;
-    let reuniao = req.body.reuniao;
+    let reuniao = req.params.reuniao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !reuniao) {
@@ -428,7 +454,7 @@ exports.deleteObservacao = (req, res, next) => {
     let id = req.params.id;
     let index_l = req.params.index_l;
     let index_o = req.params.index_o;
-    let observacao = req.body.observacao;
+    let observacao = req.params.observacao;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !observacao) {
@@ -453,7 +479,7 @@ exports.deleteObservacaoExtra = (req, res, next) => {
     let index_l = req.params.index_l;
     let index_s = req.params.index_s;
     let index_o = req.params.index_o;
-    let obs = req.body.obs;
+    let obs = req.params.obs;
 
     Lista.findOne({ id: id }, (err, data) => {
         if (err || !data || !obs) {

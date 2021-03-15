@@ -40,12 +40,12 @@ function ListaCrud() {
 
     const [inputChgLista, setInputChgLista] = useState(0)
 
-    useEffect(() => {
+    /* useEffect(() => {
         console.log(window.localStorage.getItem("lista"))
         if (JSON.parse(window.localStorage.getItem("lista")) !== null) {
             setInputLista([JSON.parse(window.localStorage.getItem("lista"))])
         }
-    }, [inputChgLista])
+    }, [inputChgLista]) */
 
     useEffect(async () => {
         await testAxios()
@@ -54,19 +54,29 @@ function ListaCrud() {
 
     useEffect(() => {
         let values = { ...inputListas };
-        console.log(inputListas)
+        console.log(inputListas);
+
+        
+        console.log("EAE");
+
+        console.log(window.localStorage.getItem("lista"));
+
+        if(window.localStorage.getItem("voltar") === 1){
+            values[0] = JSON.parse(window.localStorage.getItem("lista"));
+            window.localStorage.setItem("voltar", 0);
+        }
 
 
         if (values[0].localidades.length != 0) {
             window.localStorage.setItem("lista", JSON.stringify(values[0]))
             setInputDisabled(false)
             if (window.localStorage.getItem("id") !== null && window.localStorage.getItem("id") !== undefined) {
-                setInputId(70)
+                setInputId(window.localStorage.getItem("id"))
             }
-            var obj = values[0]
+            /* var obj = values[0]
             const method = inputId ? 'put' : 'post'
             const url = inputId ? `${baseUrl}/${inputId}` : baseUrl
-            console.log(url)
+            console.log(url) */
 
             /* axios[method](url, obj)
                 .catch(error => console.error('Error:', error))

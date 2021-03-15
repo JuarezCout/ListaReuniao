@@ -1,4 +1,4 @@
-const express = require('express');
+/* import express from 'express'
 const router = express.Router();
 const listaController = require('../controllers/lista');
 
@@ -46,4 +46,4 @@ module.exports = function (app) {
         .put('/observacaoextra/:id', listaController.newobservacaoExtra)
         .delete('/observacaoextra/:id', listaController.deleteObservacaoExtra);
 
-} 
+}  */

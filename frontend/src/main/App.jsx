@@ -15,7 +15,7 @@ import logo from './../assets/imgs/logo-ccb-light.png';
 export default props =>
     <HashRouter>
         <div className="app">
-            <Logo/>
+             <Logo/>
             <Navi/>
             <Routes/>
             <Footer/>
